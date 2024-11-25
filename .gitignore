@@ -1,2 +1,3 @@
 # Ignorem el directori PLANTILLA
 PLANTILLA/
+/dist/
