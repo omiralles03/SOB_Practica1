@@ -12,7 +12,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import java.util.Date;
 /**
  *
- * @author oupma
+ * @author oupman
  */
 public class JwtUtil {
     private static final String SECRET_KEY = "75928276deb2a0a7e3465a05c8706fa8fe6238f7faddbef9045ba0257671f936";

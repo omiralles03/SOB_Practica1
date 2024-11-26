@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 
 /**
  *
- * @author oupma
+ * @author oupman
  */
 @NameBinding
 @Retention(RetentionPolicy.RUNTIME)

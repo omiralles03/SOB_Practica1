@@ -14,7 +14,7 @@ import jakarta.ws.rs.ext.Provider;
 
 /**
  *
- * @author oupma
+ * @author oupman
  */
 
 @Provider

@@ -11,10 +11,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @Entity
+@Table(name = "topics")
 public class Topic implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
