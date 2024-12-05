@@ -7,6 +7,7 @@ package model.entities;
 import java.io.Serializable;
 import java.util.Date;
 import jakarta.persistence.*;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,6 +17,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "articles")
+@XmlRootElement
 public class Article implements Serializable{
     @Id
     @SequenceGenerator(name = "Article_Gen", allocationSize = 1)
@@ -25,49 +27,48 @@ public class Article implements Serializable{
     @Column(nullable = false, length = 500)
     private String body;
     
+    @Column(nullable = false, length = 100)
+    private String title;
+    
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date publishedAt;
     
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 100)
     private String summary;
     
-    @Column(nullable = false, length = 100)
-    private String title;
+    @Column(nullable = false)
+    private boolean isPrivate;
     
     @Column(nullable = false)
     private int views;
     
-    @ManyToOne
-    @JoinColumn(name = "author_id", referencedColumnName = "id", nullable = false)
-    private User author;
+    @ElementCollection
+    @CollectionTable(name = "article_topic", joinColumns = @JoinColumn(name = "article_id"))
+    @Column(name = "topic_id")
+    private List<Long> topicIds;
     
-    @ManyToMany
-    @JoinTable(name = "article_topic", joinColumns = @JoinColumn(name = "article_id"), inverseJoinColumns = @JoinColumn(name = "topic_id"))
-    private List<Topic> topics;
+    @Column(name = "author_id", nullable = false)
+    private Long authorId;
 
+    public Article(Long id, String body, String title, Date publishedAt, String summary, boolean isPrivate, int views, Long authorId) {
+        this.id = id;
+        this.body = body;
+        this.title = title;
+        this.publishedAt = publishedAt;
+        this.summary = summary;
+        this.isPrivate = isPrivate;
+        this.views = views;
+        this.authorId = authorId;
+    }
+
+    public Article(){
+        
+    }
+    
+    
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public void setSummary(String summary) {
-        this.summary = summary;
     }
 
     public String getBody() {
@@ -78,12 +79,12 @@ public class Article implements Serializable{
         this.body = body;
     }
 
-    public List<Topic> getTopics() {
-        return topics;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTopics(List<Topic> topics) {
-        this.topics = topics;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Date getPublishedAt() {
@@ -94,6 +95,22 @@ public class Article implements Serializable{
         this.publishedAt = publishedAt;
     }
 
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public boolean getIsPrivate() {
+        return isPrivate;
+    }
+
+    public void setIsPrivate(boolean isPrivate) {
+        this.isPrivate = isPrivate;
+    }
+
     public int getViews() {
         return views;
     }
@@ -102,12 +119,20 @@ public class Article implements Serializable{
         this.views = views;
     }
 
-    public User getAuthor() {
-        return author;
+    public List<Long> getTopicIds() {
+        return topicIds;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
+    public void setTopicIds(List<Long> topicIds) {
+        this.topicIds = topicIds;
+    }
+
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
     }
     
     @Override
@@ -116,21 +141,21 @@ public class Article implements Serializable{
             return false;
         }
         Article other = (Article) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.id, other.id);
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 23 * hash + Objects.hashCode(this.id);
-        return hash;
+        return Objects.hash(id);
     }
 
     @Override
     public String toString() {
-        return "model.entities.Article[ id=" + id + ", title=" + title + " ]";
+        return "Article{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", summary='" + summary + '\'' +
+                ", views=" + views +
+                '}';
     }
 }

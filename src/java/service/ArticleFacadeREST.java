@@ -7,6 +7,7 @@ package service;
 import authn.Secured;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -17,6 +18,8 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.SecurityContext;
 import java.util.Date;
 import java.util.List;
+import model.auth.CustomPrincipal;
+import model.entities.ArticleDTO;
 import model.entities.Topic;
 import model.entities.User;
 
@@ -42,72 +45,134 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findByFillters(@QueryParam("topic") List<String> topics, @QueryParam("author") String author) {
-        
-        // Initialize topics as an empty List if null
-        if(topics == null)
-            topics = List.of();
-        
-        // Return error if more than 2 topics are specified
-        if(topics.size() > 2) {
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("You can specify a maximum of two topics.")
-                    .build();
-        }
-        
-        // String for the query and add conditions if specified
+    public Response findByFilters(@QueryParam("topic") List<String> topics, @QueryParam("author") String author) {
+        List<Long> topicIds = null;
+        Long authorId = null;
+
+        // Build the query
         StringBuilder queryString = new StringBuilder("SELECT a FROM Article a WHERE 1=1");
-        
-        if (author != null) {
-            queryString.append(" AND a.author.username = :author");
-        }
-        
-        if (!topics.isEmpty()) {
-            queryString.append(" AND a.topic IN :topics");
-        }
-        
-        // Order articles by popularity (descendant)
-        queryString.append(" ORDER BY a.views DESC");
-        
-        // Build the query and only set parameters if specified
-        TypedQuery<Article> query = em.createQuery(queryString.toString(), Article.class);
-        
-        if(author != null) {
-            query.setParameter("author", author);
+
+        // Add topics to query if provided
+        if (topics != null && !topics.isEmpty() && topics.stream().anyMatch(topic -> topic != null && !topic.isEmpty())) {
+            topicIds = em.createQuery("SELECT t.id FROM Topic t WHERE t.name IN :topicNames", Long.class)
+                    .setParameter("topicNames", topics)
+                    .getResultList();
+            if (topicIds.isEmpty()) {
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity("No articles found with those topics.")
+                        .build();
+            }
+            queryString.append(" AND EXISTS (SELECT t FROM a.topicIds t WHERE t IN :topicIds)");
         }
 
-        if(!topics.isEmpty()) {
-            query.setParameter("topics", topics);
+        // Add author to query if provided
+        if (author != null && !author.isEmpty()) {
+            try {
+                authorId = em.createQuery("SELECT u.id FROM User u WHERE u.username = :authorName", Long.class)
+                        .setParameter("authorName", author)
+                        .getSingleResult();
+            } catch (NoResultException e) {
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity("No articles found with this author, or the author does not exist.")
+                        .build();
+            }
+            queryString.append(" AND a.authorId = :authorId");
         }
-        
+
+        // Sort articles by views
+        queryString.append(" ORDER BY a.views DESC");
+
+        // Create the query with the parameters provided
+        TypedQuery<Article> query = em.createQuery(queryString.toString(), Article.class);
+
+        if (topics != null && !topics.isEmpty() && topicIds != null) {
+            query.setParameter("topicIds", topicIds);
+        }
+        if (authorId != null) {
+            query.setParameter("authorId", authorId);
+        }
+
+        // Create a list of the articles or return it as empty if no articles match the filters
         List<Article> articles = query.getResultList();
-        return Response.ok().entity(articles).build();
+        if (articles.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("No articles found with the specified filters.")
+                    .build();
+        }
+
+        // Use Article DTO to return the desired info
+        List<ArticleDTO> articleDTOs = articles.stream()
+                .map(article -> {
+                    User authorEntity = em.find(User.class, article.getAuthorId());
+                    List<String> topicNames = article.getTopicIds().stream()
+                            .map(topicId -> em.find(Topic.class, topicId).getName())
+                            .toList();
+                    return new ArticleDTO(
+                            article.getId(),
+                            article.getTitle(),
+                            topicNames,
+                            article.getSummary(),
+                            article.getBody(),
+                            article.getPublishedAt(),
+                            authorEntity != null ? authorEntity.getUsername() : null,
+                            article.getIsPrivate()
+                    );
+                })
+                .toList();
+
+        return Response.ok(articleDTOs).build();
     }
     
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    @Secured
-    public Response findById(@PathParam("id") Long id) {
-        
-        // Find article by id
+    public Response findById(@PathParam("id") Long id, @Context SecurityContext securityContext) {
+        // Find article by ID
         Article article = super.find(id);
-        if(article == null) {
+        if (article == null) {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity("Article not found")
                     .build();
         }
-        
-        // Increment views
+
+        // Check if article is private and user is authenticated
+        if (article.getIsPrivate()) {
+            CustomPrincipal principal = (CustomPrincipal) securityContext.getUserPrincipal();
+            if (principal == null || principal.getUserId() == null) {
+                return Response.status(Response.Status.UNAUTHORIZED)
+                        .entity("You must be authenticated to view private articles."
+                                + "\n principal: "+principal+".")
+                        .build();
+            }
+        }
+
+        // Increment article views
         article.setViews(article.getViews() + 1);
         super.edit(article);
-        
-        return Response.ok().entity(article).build();        
+
+        // Get the author and build the ArticleDTO
+        User author = em.find(User.class, article.getAuthorId());
+        List<String> topicNames = em.createQuery(
+                "SELECT t.name FROM Topic t WHERE t.id IN :topicIds", String.class)
+                .setParameter("topicIds", article.getTopicIds())
+                .getResultList();
+
+        ArticleDTO articleDTO = new ArticleDTO(
+                article.getId(),
+                article.getTitle(),
+                topicNames,
+                article.getSummary(),
+                article.getBody(),
+                article.getPublishedAt(),
+                author != null ? author.getUsername() : null,
+                article.getIsPrivate()
+        );
+
+        return Response.ok().entity(articleDTO).build();
     }
     
     @DELETE
     @Path("{id}")
-    @Produces(MediaType.APPLICATION_JSON)
     @Secured
     public Response deleteById(@PathParam("id") Long id, @Context SecurityContext securityContext) {
         
@@ -117,10 +182,11 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
             return Response.status(Response.Status.NOT_FOUND)
                     .entity("Article not found")
                     .build();
-        }
-        
-        String username = securityContext.getUserPrincipal().getName();
-        if(!article.getAuthor().getUsername().equals(username)) {
+        }        
+
+        // Check if the authenticated user is the author of the article
+        CustomPrincipal principal = (CustomPrincipal) securityContext.getUserPrincipal();
+        if (!article.getAuthorId().equals(principal.getUserId())) {
             return Response.status(Response.Status.FORBIDDEN)
                     .entity("You can not delete an article that is not yours.")
                     .build();
@@ -135,46 +201,54 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces(MediaType.APPLICATION_JSON)
     @Secured
-    public Response createArticle(Article article, @Context SecurityContext securityContext){
+    public Response createArticle(ArticleDTO articleDTO, @Context SecurityContext securityContext) {
         
-        if(article.getTopics() == null || article.getTopics().isEmpty()) {
-            Response.status(Response.Status.BAD_REQUEST)
-                    .entity("At least one topic is required.")
-                    .build();
-        }
+        // Validate the topics by searching them in the DB
+        List<Long> topicIds = articleDTO.getTopics().stream()
+                .map(topicName -> em.createQuery("SELECT t.id FROM Topic t WHERE LOWER(t.name) = LOWER(:name)", Long.class)
+                        .setParameter("name", topicName)
+                        .getResultStream()
+                        .findFirst()
+                        .orElse(null))
+                .filter(id -> id != null)
+                .toList();
         
-        List<Topic> validTopics = em.createQuery("SELECT t FROM Topic t WHERE t.name IN: topicNames", Topic.class)
-                .setParameter("topicNames", article.getTopics())
-                .getResultList();
-        
-        if(validTopics.isEmpty() || validTopics.size() != article.getTopics().size()) {
+        if (topicIds.size() != articleDTO.getTopics().size()) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("Invalid topics")
+                    .entity("Invalid topics provided.")
+                            //+ "\nValidating topics: " + articleDTO.getTopics()+""
+                            //+ "\nFound topic IDs: " + topicIds)
                     .build();
         }
-        
-        String username = securityContext.getUserPrincipal().getName();
-        User user = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
-                .setParameter("username", username)
-                .getSingleResult();
-        article.setAuthor(user);
 
-        if(user == null) {
-            return Response.status(Response.Status.UNAUTHORIZED)
-                    .entity("User does not exist or is not authenticated.")
+        // Check if an article already exists with the same title to prevent duplicates
+        boolean exists = em.createQuery("SELECT COUNT(a) FROM Article a WHERE a.title = :title", Long.class)
+                .setParameter("title", articleDTO.getTitle())
+                .getSingleResult() > 0;
+
+        if (exists) {
+            return Response.status(Response.Status.CONFLICT)
+                    .entity("An article with the same title already exists.")
                     .build();
         }
         
+        // Create the arcticle with the JSON/XML provided
+        CustomPrincipal principal = (CustomPrincipal) securityContext.getUserPrincipal();
+        Article article = new Article();
+        article.setTitle(articleDTO.getTitle());
+        article.setSummary(articleDTO.getSummary());
+        article.setBody(articleDTO.getBody());
         article.setPublishedAt(new Date());
-        
-        article.setAuthor(user);
-        
-        article.setTopics(validTopics);
+        article.setIsPrivate(articleDTO.getIsPrivate());
+        article.setViews(0);
+        article.setAuthorId(principal.getUserId());
+        article.setTopicIds(topicIds);
         
         super.create(article);
-        
+
+        // Only return response status with the new article id
         return Response.status(Response.Status.CREATED)
-                .entity("Article created with id " +article.getId())
-                .build();        
+                .entity("Article created with ID: " + article.getId())
+                .build();
     }
 }

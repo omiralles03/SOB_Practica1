@@ -6,6 +6,8 @@ package service;
 
 import authn.JwtUtil;
 import jakarta.ejb.Stateless;
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
@@ -30,7 +32,7 @@ public class AuthResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(User user) {
         try {
-            // Get the user from the DB using NamedQuery from Crendtials.java
+            // Get the user from the DB
             User foundUser = em.createNamedQuery("User.findUser", User.class)
                     .setParameter("username", user.getUsername())
                     .getSingleResult();
@@ -38,12 +40,22 @@ public class AuthResource {
             if (foundUser.getPassword().equals(user.getPassword())) {
                 // Generate a JWT token for the user and return it as a HTTP response
                 String token = JwtUtil.generateToken(user.getUsername());
-                return Response.ok().entity("{\"token\": \"" + token + "\"}").build();
+                JsonObject jsonResponse = Json.createObjectBuilder()
+                    .add("token", token)
+                    .add("username", user.getUsername())
+                    .add("userId", foundUser.getId())
+                    .add("expiration", JwtUtil.getExpirationDate(token).toString())
+                    .build();
+
+                return Response.ok(jsonResponse).build();
             } else {
                 // If password doesnt match return HTTP 401 error
-                return Response.status(Response.Status.UNAUTHORIZED).build();
+                return Response.status(Response.Status.UNAUTHORIZED)
+                        .entity("{\"error\": \"Invalid username or password\"}")
+                        .build();
             }
         } catch (NoResultException e) {
+            // Return HTTP 401 error if not able to validate the token
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
     }
