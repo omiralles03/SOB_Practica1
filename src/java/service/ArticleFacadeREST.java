@@ -4,7 +4,9 @@
  */
 package service;
 
+import authn.JwtUtil;
 import authn.Secured;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
@@ -104,18 +106,17 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
         List<ArticleDTO> articleDTOs = articles.stream()
                 .map(article -> {
                     User authorEntity = em.find(User.class, article.getAuthorId());
-                    List<String> topicNames = article.getTopicIds().stream()
-                            .map(topicId -> em.find(Topic.class, topicId).getName())
-                            .toList();
                     return new ArticleDTO(
                             article.getId(),
                             article.getTitle(),
-                            topicNames,
+                            null,
                             article.getSummary(),
-                            article.getBody(),
+                            null,
                             article.getPublishedAt(),
-                            authorEntity != null ? authorEntity.getUsername() : null,
-                            article.getIsPrivate()
+                            authorEntity.getUsername(),
+                            article.getViews(),
+                            article.getIsPrivate(),
+                            article.getImageURL()
                     );
                 })
                 .toList();
@@ -126,7 +127,7 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response findById(@PathParam("id") Long id, @Context SecurityContext securityContext) {
+    public Response findById(@PathParam("id") Long id, @HeaderParam("Authorization") String authorizationHeader) {
         // Find article by ID
         Article article = super.find(id);
         if (article == null) {
@@ -137,11 +138,30 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
 
         // Check if article is private and user is authenticated
         if (article.getIsPrivate()) {
-            CustomPrincipal principal = (CustomPrincipal) securityContext.getUserPrincipal();
-            if (principal == null || principal.getUserId() == null) {
+            if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
                 return Response.status(Response.Status.UNAUTHORIZED)
-                        .entity("You must be authenticated to view private articles."
-                                + "\n principal: "+principal+".")
+                        .entity("You must provide a valid token to access private articles.")
+                        .build();
+            }
+
+            // Validate JWT Token as done in JwtFilter (necessary since we do not use @Secured)
+            String token = authorizationHeader.substring("Bearer".length()).trim();
+            String username;
+            try {
+                username = JwtUtil.validateToken(token);
+            } catch (JWTVerificationException e) {
+                return Response.status(Response.Status.UNAUTHORIZED)
+                        .entity("Invalid or expired token.")
+                        .build();
+            }
+
+            // Check if the user exists in the DB
+            User user = em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
+                    .setParameter("username", username)
+                    .getSingleResult();
+            if (user == null) {
+                return Response.status(Response.Status.UNAUTHORIZED)
+                        .entity("User not found.")
                         .build();
             }
         }
@@ -161,13 +181,15 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
                 article.getId(),
                 article.getTitle(),
                 topicNames,
-                article.getSummary(),
+                null,
                 article.getBody(),
                 article.getPublishedAt(),
-                author != null ? author.getUsername() : null,
-                article.getIsPrivate()
+                author.getUsername(),
+                article.getViews(),
+                article.getIsPrivate(),
+                article.getImageURL()
         );
-
+        
         return Response.ok().entity(articleDTO).build();
     }
     
@@ -202,7 +224,9 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
     @Produces(MediaType.APPLICATION_JSON)
     @Secured
     public Response createArticle(ArticleDTO articleDTO, @Context SecurityContext securityContext) {
-        
+         System.out.println("Starting POST");
+        System.out.println("Received ArticleDTO: " + articleDTO);
+
         // Validate the topics by searching them in the DB
         List<Long> topicIds = articleDTO.getTopics().stream()
                 .map(topicName -> em.createQuery("SELECT t.id FROM Topic t WHERE LOWER(t.name) = LOWER(:name)", Long.class)
@@ -216,8 +240,6 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
         if (topicIds.size() != articleDTO.getTopics().size()) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity("Invalid topics provided.")
-                            //+ "\nValidating topics: " + articleDTO.getTopics()+""
-                            //+ "\nFound topic IDs: " + topicIds)
                     .build();
         }
 
@@ -243,6 +265,7 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
         article.setViews(0);
         article.setAuthorId(principal.getUserId());
         article.setTopicIds(topicIds);
+        article.setImageURL(articleDTO.getImageURL());
         
         super.create(article);
 

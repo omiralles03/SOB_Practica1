@@ -4,7 +4,10 @@
  */
 package model.entities;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,19 +18,31 @@ import java.util.List;
 @XmlRootElement
 public class ArticleDTO {
     private Long id;
+    
     private String title;
+    
+    @XmlElementWrapper(name = "topics")
+    @XmlElement(name = "topic")
     private List<String> topics;
+    
     private String summary;
+    
     private String body;
+    
     private Date publishedAt;
+    
     private String authorUsername;
-    private int views;
+    
+    private Integer views;
+    
     private boolean isPrivate;
+    
+    private String imageURL;
 
     public ArticleDTO() {
     }
     
-    public ArticleDTO(Long id, String title, List<String> topics, String summary, String body, Date publishedAt, String authorUsername, boolean isPrivate) {
+    public ArticleDTO(Long id, String title, List<String> topics, String summary, String body, Date publishedAt, String authorUsername, Integer views, boolean isPrivate, String imageURL) {
         this.id = id;
         this.title = title;
         this.topics = topics;
@@ -35,7 +50,17 @@ public class ArticleDTO {
         this.body = body;
         this.publishedAt = publishedAt;
         this.authorUsername = authorUsername;
+        this.views = views;
         this.isPrivate = isPrivate;
+        this.imageURL = imageURL;
+    }
+    
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public Long getId() {
@@ -94,11 +119,11 @@ public class ArticleDTO {
         this.authorUsername = authorUsername;
     }
 
-    public int getViews() {
+    public Integer getViews() {
         return views;
     }
 
-    public void setViews(int views) {
+    public void setViews(Integer views) {
         this.views = views;
     }
 
@@ -108,5 +133,21 @@ public class ArticleDTO {
 
     public void setIsPrivate(boolean isPrivate) {
         this.isPrivate = isPrivate;
+    }
+    
+    @Override
+    public String toString() {
+        return "ArticleDTO{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", topics=" + topics +
+                ", summary='" + summary + '\'' +
+                ", body='" + body + '\'' +
+                ", publishedAt=" + publishedAt +
+                ", authorUsername='" + authorUsername + '\'' +
+                ", views=" + views +
+                ", isPrivate=" + isPrivate +
+                ", imageURL='" + imageURL + '\'' +
+                '}';
     }
 }

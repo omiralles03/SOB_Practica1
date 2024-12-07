@@ -43,6 +43,9 @@ public class Article implements Serializable{
     @Column(nullable = false)
     private int views;
     
+    @Column(nullable = true, length = 255)
+    private String imageURL;
+    
     @ElementCollection
     @CollectionTable(name = "article_topic", joinColumns = @JoinColumn(name = "article_id"))
     @Column(name = "topic_id")
@@ -51,7 +54,7 @@ public class Article implements Serializable{
     @Column(name = "author_id", nullable = false)
     private Long authorId;
 
-    public Article(Long id, String body, String title, Date publishedAt, String summary, boolean isPrivate, int views, Long authorId) {
+    public Article(Long id, String body, String title, Date publishedAt, String summary, boolean isPrivate, int views, Long authorId, String imageURL) {
         this.id = id;
         this.body = body;
         this.title = title;
@@ -60,12 +63,20 @@ public class Article implements Serializable{
         this.isPrivate = isPrivate;
         this.views = views;
         this.authorId = authorId;
+        this.imageURL = imageURL;
     }
 
     public Article(){
         
     }
     
+    public String getImageURL() {
+        return imageURL;
+    }
+    
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
     
     public Long getId() {
         return id;
@@ -156,6 +167,7 @@ public class Article implements Serializable{
                 ", title='" + title + '\'' +
                 ", summary='" + summary + '\'' +
                 ", views=" + views +
+                ", imageURL='" + imageURL + '\'' +
                 '}';
     }
 }

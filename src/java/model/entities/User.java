@@ -52,6 +52,7 @@ public class User implements Serializable{
             return null;
         }
     }
+    
     public Long getId() {
         return id;
     }
