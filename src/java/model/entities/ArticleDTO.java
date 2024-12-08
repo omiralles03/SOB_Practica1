@@ -17,7 +17,6 @@ import java.util.List;
  */
 @XmlRootElement
 public class ArticleDTO {
-    private Long id;
     
     private String title;
     
@@ -42,8 +41,7 @@ public class ArticleDTO {
     public ArticleDTO() {
     }
     
-    public ArticleDTO(Long id, String title, List<String> topics, String summary, String body, Date publishedAt, String authorUsername, Integer views, boolean isPrivate, String imageURL) {
-        this.id = id;
+    public ArticleDTO(String title, List<String> topics, String summary, String body, Date publishedAt, String authorUsername, Integer views, boolean isPrivate, String imageURL) {
         this.title = title;
         this.topics = topics;
         this.summary = summary;
@@ -61,14 +59,6 @@ public class ArticleDTO {
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getTitle() {
@@ -138,7 +128,6 @@ public class ArticleDTO {
     @Override
     public String toString() {
         return "ArticleDTO{" +
-                "id=" + id +
                 ", title='" + title + '\'' +
                 ", topics=" + topics +
                 ", summary='" + summary + '\'' +

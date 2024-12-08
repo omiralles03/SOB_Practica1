@@ -12,25 +12,15 @@ import jakarta.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class UserDTO {
-    private Long id;
     private String username;
     private Link links;
 
     public UserDTO() {
     }
 
-    public UserDTO(Long id, String username, Link links) {
-        this.id = id;
+    public UserDTO(String username, Link links) {
         this.username = username;
         this.links = links;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUsername() {

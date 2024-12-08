@@ -22,12 +22,11 @@ import java.util.Date;
 import java.util.List;
 import model.auth.CustomPrincipal;
 import model.entities.ArticleDTO;
-import model.entities.Topic;
 import model.entities.User;
 
 /**
  *
- * @author oupman
+ * @author oupman, gerard
  */
 @Stateless
 @Path("article")
@@ -107,7 +106,6 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
                 .map(article -> {
                     User authorEntity = em.find(User.class, article.getAuthorId());
                     return new ArticleDTO(
-                            article.getId(),
                             article.getTitle(),
                             null,
                             article.getSummary(),
@@ -178,7 +176,6 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
                 .getResultList();
 
         ArticleDTO articleDTO = new ArticleDTO(
-                article.getId(),
                 article.getTitle(),
                 topicNames,
                 null,
@@ -268,6 +265,8 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
         article.setImageURL(articleDTO.getImageURL());
         
         super.create(article);
+        
+        
 
         // Only return response status with the new article id
         return Response.status(Response.Status.CREATED)

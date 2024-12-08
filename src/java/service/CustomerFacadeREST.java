@@ -19,7 +19,7 @@ import model.entities.UserDTO;
 
 /**
  *
- * @author oupma
+ * @author oupman, gerard
  */
 @Stateless
 @Path("customer")
@@ -40,7 +40,6 @@ public class CustomerFacadeREST {
             Link link = lastArticleId != null ? new Link("/article/" + lastArticleId) : null;
 
             return new UserDTO(
-                user.getId(),
                 user.getUsername(),
                 link
             );
@@ -66,7 +65,6 @@ public class CustomerFacadeREST {
         Link link = lastArticleId != null ? new Link("/article/" + lastArticleId) : null;
         
         UserDTO userDTO = new UserDTO(
-                user.getId(),
                 user.getUsername(),
                 link
         );
@@ -79,7 +77,7 @@ public class CustomerFacadeREST {
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces(MediaType.APPLICATION_JSON)
     @Secured
-    public Response updateUser(@PathParam("id") Long id, UserDTO updatedUser, @Context SecurityContext securityContext) {
+    public Response updateUser(@PathParam("id") Long id, User updatedUser, @Context SecurityContext securityContext) {
 
         // Find user by ID
         User user = em.find(User.class, id);
@@ -92,6 +90,10 @@ public class CustomerFacadeREST {
         // Update client data if provided
         if (updatedUser.getUsername() != null && !updatedUser.getUsername().isEmpty())
             user.setUsername(updatedUser.getUsername());
+        
+        // Update client data if provided
+        if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty())
+            user.setPassword(updatedUser.getPassword());
 
         em.merge(user);
 
