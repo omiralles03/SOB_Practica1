@@ -6,8 +6,10 @@ package authn;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import jakarta.ws.rs.core.Response;
 import java.util.Date;
 /**
  *
@@ -22,19 +24,32 @@ public class JwtUtil {
     
     // Generate User JWT Token
     public static String generateToken(String username) {
-        return JWT.create()
-                .withSubject(username)
-                .withIssuer(ISSUER)
-                .withExpiresAt(expirationToken)
-                .sign(algorithm);
+        String generatedJWT = null;
+        try {
+            generatedJWT= JWT.create()
+                    .withSubject(username)
+                    .withIssuer(ISSUER)
+                    .withExpiresAt(expirationToken)
+                    .sign(algorithm);
+        } catch (JWTCreationException e ) {
+            Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error generating token: " + e.getMessage())
+                    .build();
+        }
+        return generatedJWT;
     }
     
     // Validate JWT Token and return the subject if valid
     public static String validateToken(String token) throws JWTVerificationException{
-        DecodedJWT jwt = JWT.require(algorithm)
+        DecodedJWT jwt = null;
+        try {
+            jwt = JWT.require(algorithm)
                 .withIssuer(ISSUER)
                 .build()
                 .verify(token);
+        } catch (JWTVerificationException e) {
+            throw new JWTVerificationException("Invalid token: " + e.getMessage());
+        }
         return jwt.getSubject();
     }
     

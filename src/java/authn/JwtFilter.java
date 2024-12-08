@@ -71,7 +71,25 @@ public class JwtFilter implements ContainerRequestFilter {
             });
         } catch (JWTVerificationException e) {
             // Return HTTP 401 error if invalid or null token
-            requestContext.abortWith(Response.status(Response.Status.UNAUTHORIZED).build());
+            requestContext.abortWith(
+                Response.status(Response.Status.UNAUTHORIZED)
+                        .entity("Invalid or expired JWT token. Please authenticate again.")
+                        .build()
+            );
+        } catch (NoResultException e) {
+            // Handle case where the username in the token does not exist in the DB
+            requestContext.abortWith(
+                Response.status(Response.Status.UNAUTHORIZED)
+                        .entity("The user associated with this token does not exist.")
+                        .build()
+            );
+        } catch (Exception e) {
+            // Catch any other errors like DB issues or unexpected exceptions
+            requestContext.abortWith(
+                Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                        .entity("An error occurred while processing the authentication token.")
+                        .build()
+            );
         }
     }
 }

@@ -221,8 +221,6 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
     @Produces(MediaType.APPLICATION_JSON)
     @Secured
     public Response createArticle(ArticleDTO articleDTO, @Context SecurityContext securityContext) {
-         System.out.println("Starting POST");
-        System.out.println("Received ArticleDTO: " + articleDTO);
 
         // Validate the topics by searching them in the DB
         List<Long> topicIds = articleDTO.getTopics().stream()
@@ -251,6 +249,52 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
                     .build();
         }
         
+        // Validate body
+        if (articleDTO.getBody() == null || articleDTO.getBody().isBlank()) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("The body of the article cannot be null or blank.")
+                    .build();
+        }
+
+        if (articleDTO.getBody().length() > 500) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("The body of the article cant be longer than 500 characters.")
+                    .build();
+        }
+        
+        // Validate title
+        if (articleDTO.getTitle() == null || articleDTO.getTitle().isBlank()) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("The title of the article cannot be null or blank.")
+                    .build();
+        }
+
+        if (articleDTO.getTitle().length() > 100) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("The title of the article can't be longer than 100 characters.")
+                    .build();
+        }
+        
+        // Validate summary
+        if (articleDTO.getSummary() == null || articleDTO.getSummary().isBlank()) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("The summary of the article cannot be null or blank.")
+                    .build();
+        }
+
+        if (articleDTO.getSummary().length() > 100) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("The summary of the article can't be longer than 100 characters.")
+                    .build();
+        }
+        
+        // Validate imageURL length
+        if (articleDTO.getImageURL() != null && articleDTO.getImageURL().length() > 255) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("The image URL of the article can't be longer than 255 characters.")
+                    .build();
+        }  
+        
         // Create the arcticle with the JSON/XML provided
         CustomPrincipal principal = (CustomPrincipal) securityContext.getUserPrincipal();
         Article article = new Article();
@@ -266,8 +310,6 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
         
         super.create(article);
         
-        
-
         // Only return response status with the new article id
         return Response.status(Response.Status.CREATED)
                 .entity("Article created with ID: " + article.getId())

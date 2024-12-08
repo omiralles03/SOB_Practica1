@@ -46,14 +46,14 @@
                 "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'sob', 'sob')",
                 "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'admin123', 'admin')",
                 "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'password123', 'john_doe')",
-                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'securepass', 'jane_smith')",
-                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'mypassword', 'charlie_brown')",
-                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'passw0rd!', 'alice_wonder')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'securepass910', 'jane_smith')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'mypassword9', 'charlie_brown')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'wonder4this', 'alice_wonder')",
                 "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'qwerty123', 'bob_builder')",
-                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'letmein!', 'dora_explorer')",
-                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'password456', 'harry_potter')",
-                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'admin123', 'lara_croft')",
-                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'hunter2', 'peter_parker')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'letmein', 'dora_explorer')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'hogwarts69', 'harry_potter')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'larita123', 'lara_croft')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'ironman', 'peter_parker')",
                 "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'trustno1', 'tony_stark')",
 
 
@@ -88,13 +88,45 @@
                     + "'What exactly is JS?', "
                     + "'JavaScript Programming Language', "
                     + "3300)",
-                    
-
+                 "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "3, "
+                    + "'Exploring the future of WebAssembly in modern browsers.', "
+                    + "'https://picsum.photos/seed/wa/200/300', "
+                    + "0, "
+                    + "CURRENT_TIMESTAMP, "
+                    + "'The potential of WebAssembly', "
+                    + "'WebAssembly Insights', "
+                    + "12000)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "4, "
+                    + "'How blockchain technology is revolutionizing industries.', "
+                    + "'https://picsum.photos/seed/block/200/300', "
+                    + "1, "
+                    + "CURRENT_TIMESTAMP, "
+                    + "'Blockchain in practice', "
+                    + "'Blockchain Revolution', "
+                    + "15000)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "5, "
+                    + "'The rise of Bitcoin as a decentralized currency.', "
+                    + "'https://picsum.photos/seed/btc/200/300', "
+                    + "0, "
+                    + "CURRENT_TIMESTAMP, "
+                    + "'Bitcoin adoption globally', "
+                    + "'Bitcoin Trends', "
+                    + "8700)",
+                
                 // Relacions article-tòpic (ARTICLE_TOPICS)
                 "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (1, 1)",
                 "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (2, 2)",
                 "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (3, 3)",
-                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (3, 4)"
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (3, 4)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (4, 4)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (5, 2)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (6, 1)"
             };
             for (String datum : data) {
                 if (stmt.executeUpdate(datum)<=0) {

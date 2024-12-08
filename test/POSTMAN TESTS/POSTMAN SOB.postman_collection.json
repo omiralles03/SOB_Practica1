@@ -1,0 +1,1916 @@
+{
+	"info": {
+		"_postman_id": "e57b0bd0-4181-4259-bc1a-2232c939df43",
+		"name": "POSTMAN SOB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39981827"
+	},
+	"item": [
+		{
+			"name": "Articles",
+			"item": [
+				{
+					"name": "GET article(topic & author)",
+					"item": [
+						{
+							"name": "Crida sense paràmetres",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Codi d'estat és 200\", function () {\r",
+											"    pm.response.to.have.status(200); // Comprova que la petició ha estat correcta\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Comprova que la resposta conté una llista d'articles\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData).to.be.an(\"array\"); // La resposta ha de ser una matriu\r",
+											"    pm.expect(jsonData.length).to.be.at.least(1); // Assegura que hi ha almenys un article\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Comprova que cada article té els camps necessaris de la Figura 1\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    jsonData.forEach(article => {\r",
+											"        pm.expect(article).to.have.property(\"title\");\r",
+											"        pm.expect(article).to.have.property(\"imageURL\");\r",
+											"        pm.expect(article).to.have.property(\"authorUsername\");\r",
+											"        pm.expect(article).to.have.property(\"summary\");\r",
+											"        pm.expect(article).to.have.property(\"views\");\r",
+											"        pm.expect(article).to.have.property(\"isPrivate\");\r",
+											"        pm.expect(article).to.have.property(\"publishedAt\");\r",
+											"    });\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Filtrar per un únic topic",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova que la petició ha estat correcta\r",
+											"pm.test(\"Codi d'estat és 200\", function () {\r",
+											"    pm.response.to.have.status(200); \r",
+											"});\r",
+											"\r",
+											"// La resposta ha de ser una matriu\r",
+											"pm.test(\"Comprova que la resposta conté una llista d'articles\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData).to.be.an(\"array\"); \r",
+											"});\r",
+											"\r",
+											"pm.test(\"Comprova que cada article té els camps necessaris de la Figura 1\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    jsonData.forEach(article => {\r",
+											"        pm.expect(article).to.have.property(\"title\");\r",
+											"        pm.expect(article).to.have.property(\"imageURL\");\r",
+											"        pm.expect(article).to.have.property(\"authorUsername\");\r",
+											"        pm.expect(article).to.have.property(\"summary\");\r",
+											"        pm.expect(article).to.have.property(\"views\");\r",
+											"        pm.expect(article).to.have.property(\"isPrivate\");\r",
+											"        pm.expect(article).to.have.property(\"publishedAt\");\r",
+											"    });\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article?topic=Bitcoin",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article"
+									],
+									"query": [
+										{
+											"key": "topic",
+											"value": "Bitcoin"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Filtrar per múltiples topics",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova que la petició ha estat correcta\r",
+											"pm.test(\"Codi d'estat és 200\", function () {\r",
+											"    pm.response.to.have.status(200); \r",
+											"});\r",
+											"\r",
+											"// La resposta ha de ser una matriu\r",
+											"pm.test(\"Comprova que la resposta conté una llista d'articles\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData).to.be.an(\"array\"); \r",
+											"});\r",
+											"\r",
+											"pm.test(\"Comprova que cada article té els camps necessaris de la Figura 1\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    jsonData.forEach(article => {\r",
+											"        pm.expect(article).to.have.property(\"title\");\r",
+											"        pm.expect(article).to.have.property(\"imageURL\");\r",
+											"        pm.expect(article).to.have.property(\"authorUsername\");\r",
+											"        pm.expect(article).to.have.property(\"summary\");\r",
+											"        pm.expect(article).to.have.property(\"views\");\r",
+											"        pm.expect(article).to.have.property(\"isPrivate\");\r",
+											"        pm.expect(article).to.have.property(\"publishedAt\");\r",
+											"    });\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article?topic=Bitcoin&topic=Blockchains",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article"
+									],
+									"query": [
+										{
+											"key": "topic",
+											"value": "Bitcoin"
+										},
+										{
+											"key": "topic",
+											"value": "Blockchains"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Prova amb un topic inexistent",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova que el tòpic no existeix\r",
+											"pm.test(\"Codi d'estat és 404. Topic inexistent\", function () {\r",
+											"    pm.response.to.have.status(404); \r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article?topic=NonExistentTopic",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article"
+									],
+									"query": [
+										{
+											"key": "topic",
+											"value": "NonExistentTopic"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Filtrar per un author",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova que la petició ha estat correcta\r",
+											"pm.test(\"Codi d'estat és 200\", function () {\r",
+											"    pm.response.to.have.status(200); \r",
+											"});\r",
+											"\r",
+											"// La resposta ha de ser una matriu\r",
+											"pm.test(\"Comprova que la resposta conté una llista d'articles\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData).to.be.an(\"array\"); \r",
+											"});\r",
+											"\r",
+											"pm.test(\"Comprova que cada article té els camps necessaris de la Figura 1\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    jsonData.forEach(article => {\r",
+											"        pm.expect(article).to.have.property(\"title\");\r",
+											"        pm.expect(article).to.have.property(\"imageURL\");\r",
+											"        pm.expect(article).to.have.property(\"authorUsername\");\r",
+											"        pm.expect(article).to.have.property(\"summary\");\r",
+											"        pm.expect(article).to.have.property(\"views\");\r",
+											"        pm.expect(article).to.have.property(\"isPrivate\");\r",
+											"        pm.expect(article).to.have.property(\"publishedAt\");\r",
+											"    });\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article?author=admin",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article"
+									],
+									"query": [
+										{
+											"key": "author",
+											"value": "admin"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Filtrar per topic i author",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova que la petició ha estat correcta\r",
+											"pm.test(\"Codi d'estat és 200\", function () {\r",
+											"    pm.response.to.have.status(200); \r",
+											"});\r",
+											"\r",
+											"// La resposta ha de ser una matriu\r",
+											"pm.test(\"Comprova que la resposta conté una llista d'articles\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData).to.be.an(\"array\"); \r",
+											"});\r",
+											"\r",
+											"pm.test(\"Comprova que cada article té els camps necessaris de la Figura 1\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    jsonData.forEach(article => {\r",
+											"        pm.expect(article).to.have.property(\"title\");\r",
+											"        pm.expect(article).to.have.property(\"imageURL\");\r",
+											"        pm.expect(article).to.have.property(\"authorUsername\");\r",
+											"        pm.expect(article).to.have.property(\"summary\");\r",
+											"        pm.expect(article).to.have.property(\"views\");\r",
+											"        pm.expect(article).to.have.property(\"isPrivate\");\r",
+											"        pm.expect(article).to.have.property(\"publishedAt\");\r",
+											"    });\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article?topic=JavaScript&author=admin",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article"
+									],
+									"query": [
+										{
+											"key": "topic",
+											"value": "JavaScript"
+										},
+										{
+											"key": "author",
+											"value": "admin"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Múltiples topics i author",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova que la petició ha estat correcta\r",
+											"pm.test(\"Codi d'estat és 200\", function () {\r",
+											"    pm.response.to.have.status(200); \r",
+											"});\r",
+											"\r",
+											"// La resposta ha de ser una matriu\r",
+											"pm.test(\"Comprova que la resposta conté una llista d'articles\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData).to.be.an(\"array\"); \r",
+											"});\r",
+											"\r",
+											"pm.test(\"Comprova que cada article té els camps necessaris de la Figura 1\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    jsonData.forEach(article => {\r",
+											"        pm.expect(article).to.have.property(\"title\");\r",
+											"        pm.expect(article).to.have.property(\"imageURL\");\r",
+											"        pm.expect(article).to.have.property(\"authorUsername\");\r",
+											"        pm.expect(article).to.have.property(\"summary\");\r",
+											"        pm.expect(article).to.have.property(\"views\");\r",
+											"        pm.expect(article).to.have.property(\"isPrivate\");\r",
+											"        pm.expect(article).to.have.property(\"publishedAt\");\r",
+											"    });\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article?topic=Bitcoin&topic=JavaScript&author=sob",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article"
+									],
+									"query": [
+										{
+											"key": "topic",
+											"value": "Bitcoin"
+										},
+										{
+											"key": "topic",
+											"value": "JavaScript"
+										},
+										{
+											"key": "author",
+											"value": "sob"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Prova amb un author inexistent",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova que el tòpic no existeix\r",
+											"pm.test(\"Codi d'estat és 404. Topic inexistent\", function () {\r",
+											"    pm.response.to.have.status(404); \r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article?author=unknown_user",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article"
+									],
+									"query": [
+										{
+											"key": "author",
+											"value": "unknown_user"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Prova amb paràmetres buits",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova que la resposta és correcta\r",
+											"pm.test(\"Codi d'estat és 200\", function () {\r",
+											"    pm.response.to.have.status(200); \r",
+											"});\r",
+											"\r",
+											"// Comprova que la resposta et retorna tots els articles\r",
+											"pm.test(\"Comprova que retorna una llista d'articles\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData).to.be.an(\"array\"); \r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article?topic=&author=",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article"
+									],
+									"query": [
+										{
+											"key": "topic",
+											"value": ""
+										},
+										{
+											"key": "author",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET article (id)",
+					"item": [
+						{
+							"name": "ID existent d'article públic",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova que la petició ha estat correcta\r",
+											"pm.test(\"El codi d'estat és 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Comprova que l'article té camps necessaris\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData).to.have.property(\"authorUsername\");\r",
+											"    pm.expect(jsonData).to.have.property(\"body\");\r",
+											"    pm.expect(jsonData).to.have.property(\"imageURL\");\r",
+											"    pm.expect(jsonData).to.have.property(\"isPrivate\");\r",
+											"    pm.expect(jsonData).to.have.property(\"publishedAt\");\r",
+											"    pm.expect(jsonData).to.have.property(\"title\");\r",
+											"    pm.expect(jsonData).to.have.property(\"topics\");\r",
+											"    pm.expect(jsonData).to.have.property(\"views\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"El camp views és un número positiu\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.views).to.be.a(\"number\").and.to.be.at.least(0);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ID existent d'article privat sense autenticació",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova el codi HTTP\r",
+											"pm.test(\"Comprova que retorna 401 sense autenticació\", function () {\r",
+											"    pm.response.to.have.status(401); \r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article/3",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ID existent d'article privat amb autenticació",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// URL del endpoint d'autenticació\r",
+											"const authUrl = pm.environment.get(\"url\") + \"/\" + pm.environment.get(\"endpoint\") + \"/auth\";\r",
+											"\r",
+											"// Credencials d'usuari\r",
+											"const credentials = {\r",
+											"    username: \"sob\",\r",
+											"    password: \"sob\"\r",
+											"};\r",
+											"\r",
+											"// Fer la petició POST al endpoint d'autenticació\r",
+											"pm.sendRequest({\r",
+											"    url: authUrl,\r",
+											"    method: \"POST\",\r",
+											"    header: {\r",
+											"        \"Content-Type\": \"application/json\"\r",
+											"    },\r",
+											"    body: {\r",
+											"        mode: \"raw\",\r",
+											"        raw: JSON.stringify(credentials)\r",
+											"    }\r",
+											"}, function (err, res) {\r",
+											"    if (err) {\r",
+											"        console.error(\"Error obtenint el token JWT:\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    // Extreure el token de la resposta i guardar-lo com a variable d'entorn\r",
+											"    const token = res.json().token;\r",
+											"    pm.environment.set(\"Authorization\", `Bearer ${token}`);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova que la petició ha estat correcta\r",
+											"pm.test(\"Codi d'estat és 200\", function () {\r",
+											"    pm.response.to.have.status(200); \r",
+											"});\r",
+											"\r",
+											"pm.test(\"Comprova que l'article té camps necessaris\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData).to.have.property(\"title\");\r",
+											"    pm.expect(jsonData).to.have.property(\"body\");\r",
+											"    pm.expect(jsonData).to.have.property(\"authorUsername\");\r",
+											"    pm.expect(jsonData).to.have.property(\"topics\");\r",
+											"    pm.expect(jsonData).to.have.property(\"views\");\r",
+											"    pm.expect(jsonData).to.have.property(\"isPrivate\");\r",
+											"    pm.expect(jsonData).to.have.property(\"publishedAt\");\r",
+											"});\r",
+											"\r",
+											"// Comprova que l'article és privat\r",
+											"pm.test(\"Comprova que el camp isPrivate és true\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.isPrivate).to.be.true; \r",
+											"});\r",
+											"\r",
+											"// Comprova que el nombre de vistes és vàlid\r",
+											"pm.test(\"Comprova que el camp views és un número positiu\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.views).to.be.a(\"number\").and.to.be.at.least(0); \r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article/3",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ID d'article inexistent",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova que l'article no existeix\r",
+											"pm.test(\"Codi d'estat és 404\", function () {\r",
+											"    pm.response.to.have.status(404); \r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article/99",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article",
+										"99"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "DELETE article",
+					"item": [
+						{
+							"name": "article existent com a autor (sob - art 1)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// URL del endpoint d'autenticació\r",
+											"const authUrl = pm.environment.get(\"url\") + \"/\" + pm.environment.get(\"endpoint\") + \"/auth\";\r",
+											"\r",
+											"// Credencials d'usuari\r",
+											"const credentials = {\r",
+											"    username: \"sob\",\r",
+											"    password: \"sob\"\r",
+											"};\r",
+											"\r",
+											"// Fer la petició POST al endpoint d'autenticació\r",
+											"pm.sendRequest({\r",
+											"    url: authUrl,\r",
+											"    method: \"POST\",\r",
+											"    header: {\r",
+											"        \"Content-Type\": \"application/json\"\r",
+											"    },\r",
+											"    body: {\r",
+											"        mode: \"raw\",\r",
+											"        raw: JSON.stringify(credentials)\r",
+											"    }\r",
+											"}, function (err, res) {\r",
+											"    if (err) {\r",
+											"        console.error(\"Error obtenint el token JWT:\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    // Extreure el token de la resposta i guardar-lo com a variable d'entorn\r",
+											"    const token = res.json().token;\r",
+											"    pm.environment.set(\"Authorization\", `Bearer ${token}`);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova que la petició ha estat satisfactòria\r",
+											"pm.test(\"Codi d'estat és 204\", function () {\r",
+											"    pm.response.to.have.status(204); \r",
+											"});\r",
+											"\r",
+											"pm.test(\"Comprova que el missatge de confirmació és correcte\", function () {\r",
+											"    if (pm.response.status === 200) {\r",
+											"        const jsonData = pm.response.json();\r",
+											"        pm.expect(jsonData).to.have.property(\"message\");\r",
+											"        pm.expect(jsonData.message).to.include(\"Article deleted successfully\");\r",
+											"    }\r",
+											"});\r",
+											"\r",
+											"// Prova que l'article ja no existeix\r",
+											"pm.test(\"Comprova que l'article ha estat eliminat\", function () {\r",
+											"    const articleId = 1;\r",
+											"    pm.sendRequest({\r",
+											"        url: `${pm.environment.get(\"url\")}/${pm.environment.get(\"endpoint\")}/article/${articleId}`,\r",
+											"        method: \"GET\",\r",
+											"        header: {\r",
+											"            \"Authorization\": pm.environment.get(\"Authorization\")\r",
+											"        }\r",
+											"    }, function (err, res) {\r",
+											"        pm.expect(res).to.have.status(404); // Comprova que l'article no existeix\r",
+											"    });\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "article existent sense ser l'autor (sob - art 3)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// URL del endpoint d'autenticació\r",
+											"const authUrl = pm.environment.get(\"url\") + \"/\" + pm.environment.get(\"endpoint\") + \"/auth\";\r",
+											"\r",
+											"// Credencials d'usuari\r",
+											"const credentials = {\r",
+											"    username: \"sob\",\r",
+											"    password: \"sob\"\r",
+											"};\r",
+											"\r",
+											"// Fer la petició POST al endpoint d'autenticació\r",
+											"pm.sendRequest({\r",
+											"    url: authUrl,\r",
+											"    method: \"POST\",\r",
+											"    header: {\r",
+											"        \"Content-Type\": \"application/json\"\r",
+											"    },\r",
+											"    body: {\r",
+											"        mode: \"raw\",\r",
+											"        raw: JSON.stringify(credentials)\r",
+											"    }\r",
+											"}, function (err, res) {\r",
+											"    if (err) {\r",
+											"        console.error(\"Error obtenint el token JWT:\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    // Extreure el token de la resposta i guardar-lo com a variable d'entorn\r",
+											"    const token = res.json().token;\r",
+											"    pm.environment.set(\"Authorization\", `Bearer ${token}`);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova que la petició és rebutjada\r",
+											"pm.test(\"Codi d'estat és 403\", function () {\r",
+											"    pm.response.to.have.status(403); \r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article/3",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "article inexistent",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// URL del endpoint d'autenticació\r",
+											"const authUrl = pm.environment.get(\"url\") + \"/\" + pm.environment.get(\"endpoint\") + \"/auth\";\r",
+											"\r",
+											"// Credencials d'usuari\r",
+											"const credentials = {\r",
+											"    username: \"sob\",\r",
+											"    password: \"sob\"\r",
+											"};\r",
+											"\r",
+											"// Fer la petició POST al endpoint d'autenticació\r",
+											"pm.sendRequest({\r",
+											"    url: authUrl,\r",
+											"    method: \"POST\",\r",
+											"    header: {\r",
+											"        \"Content-Type\": \"application/json\"\r",
+											"    },\r",
+											"    body: {\r",
+											"        mode: \"raw\",\r",
+											"        raw: JSON.stringify(credentials)\r",
+											"    }\r",
+											"}, function (err, res) {\r",
+											"    if (err) {\r",
+											"        console.error(\"Error obtenint el token JWT:\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    // Extreure el token de la resposta i guardar-lo com a variable d'entorn\r",
+											"    const token = res.json().token;\r",
+											"    pm.environment.set(\"Authorization\", `Bearer ${token}`);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova que l'article no existeix\r",
+											"pm.test(\"Codi d'estat és 404. Article inexistent\", function () {\r",
+											"    pm.response.to.have.status(404); \r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article/99",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article",
+										"99"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "article sense autenticació",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova el codi HTTP\r",
+											"pm.test(\"Comprova que retorna 401 sense autenticació\", function () {\r",
+											"    pm.response.to.have.status(401); \r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "POST article",
+					"item": [
+						{
+							"name": "Article amb tòpics vàlids (JSON)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// URL del endpoint d'autenticació\r",
+											"const authUrl = pm.environment.get(\"url\") + \"/\" + pm.environment.get(\"endpoint\") + \"/auth\";\r",
+											"\r",
+											"// Credencials d'usuari\r",
+											"const credentials = {\r",
+											"    username: \"sob\",\r",
+											"    password: \"sob\"\r",
+											"};\r",
+											"\r",
+											"// Fer la petició POST al endpoint d'autenticació\r",
+											"pm.sendRequest({\r",
+											"    url: authUrl,\r",
+											"    method: \"POST\",\r",
+											"    header: {\r",
+											"        \"Content-Type\": \"application/json\"\r",
+											"    },\r",
+											"    body: {\r",
+											"        mode: \"raw\",\r",
+											"        raw: JSON.stringify(credentials)\r",
+											"    }\r",
+											"}, function (err, res) {\r",
+											"    if (err) {\r",
+											"        console.error(\"Error obtenint el token JWT:\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    // Extreure el token de la resposta i guardar-lo com a variable d'entorn\r",
+											"    const token = res.json().token;\r",
+											"    pm.environment.set(\"Authorization\", `Bearer ${token}`);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Codi d'estat és 201 Created\", function () {\r",
+											"    pm.response.to.have.status(201); // Comprova que l'article s'ha creat correctament\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Advanced Programming\",\r\n  \"summary\": \"Programming languages in 2024\",\r\n  \"body\": \"Exploring JavaScript and WebAssembly...\",\r\n  \"topics\": [\"JavaScript\", \"WebAssembly\"],\r\n  \"isPrivate\": false\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Article duplicat (JSON)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// URL del endpoint d'autenticació\r",
+											"const authUrl = pm.environment.get(\"url\") + \"/\" + pm.environment.get(\"endpoint\") + \"/auth\";\r",
+											"\r",
+											"// Credencials d'usuari\r",
+											"const credentials = {\r",
+											"    username: \"sob\",\r",
+											"    password: \"sob\"\r",
+											"};\r",
+											"\r",
+											"// Fer la petició POST al endpoint d'autenticació\r",
+											"pm.sendRequest({\r",
+											"    url: authUrl,\r",
+											"    method: \"POST\",\r",
+											"    header: {\r",
+											"        \"Content-Type\": \"application/json\"\r",
+											"    },\r",
+											"    body: {\r",
+											"        mode: \"raw\",\r",
+											"        raw: JSON.stringify(credentials)\r",
+											"    }\r",
+											"}, function (err, res) {\r",
+											"    if (err) {\r",
+											"        console.error(\"Error obtenint el token JWT:\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    // Extreure el token de la resposta i guardar-lo com a variable d'entorn\r",
+											"    const token = res.json().token;\r",
+											"    pm.environment.set(\"Authorization\", `Bearer ${token}`);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Codi d'estat és 409 Conflict\", function () {\r",
+											"    pm.response.to.have.status(409); // Comprova que l'article s'ha creat correctament\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Advanced Programming\",\r\n  \"summary\": \"Programming languages in 2024\",\r\n  \"body\": \"Exploring JavaScript and WebAssembly...\",\r\n  \"topics\": [\"JavaScript\", \"WebAssembly\"],\r\n  \"isPrivate\": false\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Article amb tòpics vàlids (XML)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// URL del endpoint d'autenticació\r",
+											"const authUrl = pm.environment.get(\"url\") + \"/\" + pm.environment.get(\"endpoint\") + \"/auth\";\r",
+											"\r",
+											"// Credencials d'usuari\r",
+											"const credentials = {\r",
+											"    username: \"sob\",\r",
+											"    password: \"sob\"\r",
+											"};\r",
+											"\r",
+											"// Fer la petició POST al endpoint d'autenticació\r",
+											"pm.sendRequest({\r",
+											"    url: authUrl,\r",
+											"    method: \"POST\",\r",
+											"    header: {\r",
+											"        \"Content-Type\": \"application/json\"\r",
+											"    },\r",
+											"    body: {\r",
+											"        mode: \"raw\",\r",
+											"        raw: JSON.stringify(credentials)\r",
+											"    }\r",
+											"}, function (err, res) {\r",
+											"    if (err) {\r",
+											"        console.error(\"Error obtenint el token JWT:\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    // Extreure el token de la resposta i guardar-lo com a variable d'entorn\r",
+											"    const token = res.json().token;\r",
+											"    pm.environment.set(\"Authorization\", `Bearer ${token}`);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Codi d'estat és 201 Created\", function () {\r",
+											"    pm.response.to.have.status(201); // Comprova que l'article s'ha creat correctament\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": " <ArticleDTO>\r\n     <title>Advanced Programming</title>\r\n     <summary>Programming languages in 2024</summary>\r\n     <body>Exploring JavaScript and WebAssembly...</body>\r\n     <topics>\r\n        <topic>JavaScript</topic>\r\n        <topic>WebAssembly</topic>\r\n     </topics>\r\n     <isPrivate>false</isPrivate>\r\n </ArticleDTO>\r\n\r\n\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Article amb tòpics invalids (JSON)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// URL del endpoint d'autenticació\r",
+											"const authUrl = pm.environment.get(\"url\") + \"/\" + pm.environment.get(\"endpoint\") + \"/auth\";\r",
+											"\r",
+											"// Credencials d'usuari\r",
+											"const credentials = {\r",
+											"    username: \"sob\",\r",
+											"    password: \"sob\"\r",
+											"};\r",
+											"\r",
+											"// Fer la petició POST al endpoint d'autenticació\r",
+											"pm.sendRequest({\r",
+											"    url: authUrl,\r",
+											"    method: \"POST\",\r",
+											"    header: {\r",
+											"        \"Content-Type\": \"application/json\"\r",
+											"    },\r",
+											"    body: {\r",
+											"        mode: \"raw\",\r",
+											"        raw: JSON.stringify(credentials)\r",
+											"    }\r",
+											"}, function (err, res) {\r",
+											"    if (err) {\r",
+											"        console.error(\"Error obtenint el token JWT:\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    // Extreure el token de la resposta i guardar-lo com a variable d'entorn\r",
+											"    const token = res.json().token;\r",
+											"    pm.environment.set(\"Authorization\", `Bearer ${token}`);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Codi d'estat és 400\", function () {\r",
+											"    pm.response.to.have.status(400); // Comprova que l'article s'ha creat correctament\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"title\": \"Advanced Programming\",\r\n  \"summary\": \"Programming languages in 2024\",\r\n  \"body\": \"Exploring JavaScript and WebAssembly...\",\r\n  \"topics\": [\"Rust\", \"Machine Learning\"],\r\n  \"isPrivate\": false\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/article",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"article"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "GET all Users",
+					"item": [
+						{
+							"name": "GET all customers",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Codi d'estat és 200\", function () {\r",
+											"    pm.response.to.have.status(200); \r",
+											"});\r",
+											"\r",
+											"pm.test(\"Comprova que la resposta és una matriu\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData).to.be.an(\"array\"); \r",
+											"});\r",
+											"\r",
+											"pm.test(\"Comprova que la matriu no està buida\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData.length).to.be.at.least(1); \r",
+											"\r",
+											"    pm.test(\"Comprova que cada client té els camps necessaris\", function () {\r",
+											"        const jsonData = pm.response.json();\r",
+											"        jsonData.forEach(customer => {\r",
+											"            pm.expect(customer).to.have.property(\"username\"); \r",
+											"        });\r",
+											"    });\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/customer",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"customer"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "GET customer by id",
+					"item": [
+						{
+							"name": "ID existent amb articles",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Update the test script to fix the TypeError\r",
+											"pm.test(\"Codi d'estat és 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Comprova que la resposta té les dades del client\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData).to.have.property(\"username\"); \r",
+											"    pm.expect(jsonData).to.have.property(\"links\"); \r",
+											"    pm.expect(jsonData.links).to.have.property(\"article\"); \r",
+											"    pm.expect(jsonData.links.article).to.be.an(\"string\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Comprova que els articles associats no són buits\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    // Comprova que hi ha articles associats al client\r",
+											"    pm.expect(jsonData.links.article).to.not.be.empty; \r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/customer/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"customer",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ID existent sense articles",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Codi d'estat és 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Comprova que la resposta té les dades del client\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData).to.have.property(\"username\"); \r",
+											"    \r",
+											"});\r",
+											"\r",
+											"pm.test(\"Comprova que no hi ha articles associats\", function () {\r",
+											"    const jsonData = pm.response.json();\r",
+											"    pm.expect(jsonData).to.not.have.property(\"links\");\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/customer/3",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"customer",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ID inexistent",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova que l'article no existeix\r",
+											"pm.test(\"Codi d'estat és 404\", function () {\r",
+											"    pm.response.to.have.status(404); \r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/customer/99",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"customer",
+										"99"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PUT UpdateUser",
+					"item": [
+						{
+							"name": "Modifica nom usuari(no autoritzat)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova el codi HTTP\r",
+											"pm.test(\"Comprova que retorna 401 sense autenticació\", function () {\r",
+											"    pm.response.to.have.status(401); \r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"sob321\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/customer/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"customer",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica contrasenya(no autoritzat)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova el codi HTTP\r",
+											"pm.test(\"Comprova que retorna 401 sense autenticació\", function () {\r",
+											"    pm.response.to.have.status(401); \r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"sob123\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/customer/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"customer",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica nom usuari(autoritzat)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// URL del endpoint d'autenticació\r",
+											"const authUrl = pm.environment.get(\"url\") + \"/\" + pm.environment.get(\"endpoint\") + \"/auth\";\r",
+											"\r",
+											"// Credencials d'usuari\r",
+											"const credentials = {\r",
+											"    username: \"sob\",\r",
+											"    password: \"sob\"\r",
+											"};\r",
+											"\r",
+											"// Fer la petició POST al endpoint d'autenticació\r",
+											"pm.sendRequest({\r",
+											"    url: authUrl,\r",
+											"    method: \"POST\",\r",
+											"    header: {\r",
+											"        \"Content-Type\": \"application/json\"\r",
+											"    },\r",
+											"    body: {\r",
+											"        mode: \"raw\",\r",
+											"        raw: JSON.stringify(credentials)\r",
+											"    }\r",
+											"}, function (err, res) {\r",
+											"    if (err) {\r",
+											"        console.error(\"Error obtenint el token JWT:\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    // Extreure el token de la resposta i guardar-lo com a variable d'entorn\r",
+											"    const token = res.json().token;\r",
+											"    pm.environment.set(\"Authorization\", `Bearer ${token}`);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Codi d'estat és 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"// Envia una sol·licitud per verificar que el nom d'usuari s'ha actualitzat\r",
+											"pm.sendRequest({\r",
+											"    url: `${pm.environment.get(\"url\")}/${pm.environment.get(\"endpoint\")}/customer/1`,\r",
+											"    method: \"GET\",\r",
+											"    header: {\r",
+											"        \"Authorization\": `Bearer ${pm.environment.get(\"Authorization\")}` // Afegeix el token d'autenticació si cal\r",
+											"    }\r",
+											"}, function (err, res) {\r",
+											"    pm.test(\"Comprova que el nom d'usuari s'ha actualitzat a la base de dades\", function () {\r",
+											"        const customerData = res.json();\r",
+											"        pm.expect(customerData).to.have.property(\"username\"); \r",
+											"        pm.expect(customerData.username).to.equal(\"sob321\"); \r",
+											"    });\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"sob321\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/customer/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"customer",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modifica contrasenya(autoritzat)",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// URL del endpoint d'autenticació\r",
+											"const authUrl = pm.environment.get(\"url\") + \"/\" + pm.environment.get(\"endpoint\") + \"/auth\";\r",
+											"\r",
+											"// Credencials d'usuari\r",
+											"const credentials = {\r",
+											"    username: \"sob\",\r",
+											"    password: \"sob\"\r",
+											"};\r",
+											"\r",
+											"// Fer la petició POST al endpoint d'autenticació\r",
+											"pm.sendRequest({\r",
+											"    url: authUrl,\r",
+											"    method: \"POST\",\r",
+											"    header: {\r",
+											"        \"Content-Type\": \"application/json\"\r",
+											"    },\r",
+											"    body: {\r",
+											"        mode: \"raw\",\r",
+											"        raw: JSON.stringify(credentials)\r",
+											"    }\r",
+											"}, function (err, res) {\r",
+											"    if (err) {\r",
+											"        console.error(\"Error obtenint el token JWT:\", err);\r",
+											"        return;\r",
+											"    }\r",
+											"\r",
+											"    // Extreure el token de la resposta i guardar-lo com a variable d'entorn\r",
+											"    const token = res.json().token;\r",
+											"    pm.environment.set(\"Authorization\", `Bearer ${token}`);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Comprova que la resposta de la petició PUT és correcte (codi 200)\r",
+											"pm.test(\"Codi d'estat és 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{Authorization}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\": \"sob123\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{endpoint}}/customer/3",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{endpoint}}",
+										"customer",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
