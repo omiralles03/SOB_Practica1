@@ -41,7 +41,8 @@ public class CustomerFacadeREST {
 
             return new UserDTO(
                 user.getUsername(),
-                link
+                link,
+                user.getImageURL()
             );
         }).toList();
         
@@ -66,7 +67,8 @@ public class CustomerFacadeREST {
         
         UserDTO userDTO = new UserDTO(
                 user.getUsername(),
-                link
+                link,
+                user.getImageURL()
         );
 
         return Response.ok(userDTO).build();
@@ -94,6 +96,8 @@ public class CustomerFacadeREST {
         // Update client data if provided
         if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty())
             user.setPassword(updatedUser.getPassword());
+        if (updatedUser.getImageURL() != null && !updatedUser.getImageURL().isEmpty())
+            user.setImageURL(updatedUser.getImageURL());
 
         em.merge(user);
 

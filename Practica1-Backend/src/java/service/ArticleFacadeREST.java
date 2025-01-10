@@ -100,10 +100,11 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
                     .entity("No articles found with the specified filters.")
                     .build();
         }
-
+  
         // Use Article DTO to return the desired info
         List<ArticleDTO> articleDTOs = articles.stream()
                 .map(article -> {
+                    System.out.println("author id: " +article.getAuthorId());
                     User authorEntity = em.find(User.class, article.getAuthorId());
                     return new ArticleDTO(
                             article.getId(),
@@ -113,6 +114,7 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
                             null,
                             article.getPublishedAt(),
                             authorEntity.getUsername(),
+                            authorEntity.getImageURL(),
                             article.getViews(),
                             article.getIsPrivate(),
                             article.getImageURL()
@@ -184,6 +186,7 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
                 article.getBody(),
                 article.getPublishedAt(),
                 author.getUsername(),
+                author.getImageURL(),
                 article.getViews(),
                 article.getIsPrivate(),
                 article.getImageURL()

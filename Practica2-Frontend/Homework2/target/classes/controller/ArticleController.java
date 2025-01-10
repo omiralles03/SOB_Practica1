@@ -11,6 +11,7 @@ import jakarta.mvc.Controller;
 import jakarta.mvc.Models;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,12 +24,19 @@ import java.util.logging.Logger;
 @Path("Article")
 public class ArticleController {
 
-    @Inject Logger log; // Logger per depurar    
+    @Inject Logger log;
     @Inject ArticleService articleService;
-    @Inject Models models; // Per injectar dades al JSP
+    @Inject Models models;
 
     @GET
-    public String showHomePage() {
+    @Path("{id}")
+    public String showArticlePage(@PathParam("id") Long id) {
+
+        Article article = articleService.getArticleById(id);
+        if (article == null) {
+            return "pages/login.jsp";
+        }
+        models.put("article", article);
         return "pages/article.jsp";
     }
 }

@@ -1,35 +1,30 @@
 package deim.urv.cat.homework2.model;
 
+import java.util.Map;
+
 public class User {
-    private String firstName;
-    private String lastName;
-    private String email;
+    private String imageURL;
+    private Map<String, String> links;
+    private String username;
 
-    public String getFirstName() {
-        return fixNull(this.firstName);
+    public User() {}
+    
+    public User(String imageURL, Map<String, String> links, String username) {
+        this.imageURL = imageURL;
+        this.links = links;
+        this.username = username;
     }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    
+    public String getImageURL() {
+        return imageURL;
     }
-
-    public String getLastName() {
-        return fixNull(this.lastName);
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return fixNull(this.email);
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    private String fixNull(String in) {
-        return (in == null) ? "" : in;
+    
+    @Override
+    public String toString() {
+        return "User{" +
+                "imageURL=" + imageURL +
+                "links=" + links +
+                ", username='" + username + '\'' +
+                '}';
     }
 }

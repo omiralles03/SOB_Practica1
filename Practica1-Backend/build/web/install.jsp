@@ -43,81 +43,330 @@
                 "INSERT INTO " + schema + ".TOPICS VALUES (NEXT VALUE FOR TOPIC_GEN, 'WebAssembly')",
                 
                 // Usuaris (users)
-                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'sob', 'sob')",
-                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'admin123', 'admin')",
-                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'password123', 'john_doe')",
-                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'securepass910', 'jane_smith')",
-                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'mypassword9', 'charlie_brown')",
-                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'wonder4this', 'alice_wonder')",
-                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'qwerty123', 'bob_builder')",
-                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'letmein', 'dora_explorer')",
-                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'hogwarts69', 'harry_potter')",
-                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'larita123', 'lara_croft')",
-                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'ironman', 'peter_parker')",
-                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'trustno1', 'tony_stark')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/women/25.jpg', 'sob', 'sob')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/women/33.jpg', 'chucky', 'happykoala482')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/women/51.jpg', 'escape', 'heavyleopard792')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/men/12.jpg', 'dodger', 'lazyostrich267')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/women/12.jpg', 'paramedi', 'sadsnake500')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/women/36.jpg', 'tiberius', 'bluebutterfly392')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/men/58.jpg', 'uuuuuuu', 'angryfish675')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/women/71.jpg', 'berkeley', 'blacksnake207')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/women/0.jpg', 'vietnam', 'smallgoose942')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/men/22.jpg', 'megadeth', 'greengorilla759')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/men/8.jpg', 'diego', 'ticklishswan549')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/women/63.jpg', 'carol', 'greensnake121')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/men/23.jpg', 'hannibal', 'purplefrog582')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/women/19.jpg', 'stone1', 'bluerabbit324')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/men/81.jpg', 'marlene', 'crazyelephant559')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/men/45.jpg', 'pimpdadd', 'brownbird822')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/women/41.jpg', '575757,', 'purplepanda907')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/men/33.jpg', 'bummer,', 'bluemouse731')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/women/16.jpg', 'kelly', 'purplegorilla898')",
+                "INSERT INTO " + schema + ".USERS VALUES (NEXT VALUE FOR USER_GEN, 'https://randomuser.me/api/portraits/women/3.jpg', 'costello', 'redbear302')",
 
 
                 // Articles
                 "INSERT INTO " + schema + ".ARTICLES VALUES ("
                     + "NEXT VALUE FOR ARTICLE_GEN, "
-                    + "1, "
-                    + "'Bitcoin is rising up by 300% due to the government inflation.',  "
+                    + "17, "
+                    + "'Bitcoin is experiencing a meteoric rise, with a 300% increase in value due to economic instability and inflation concerns. This surge has attracted significant attention from both retail and institutional investors.', "
                     + "'https://picsum.photos/id/237/200/300', "
                     + "0, "
-                    + "CURRENT_TIMESTAMP, "
-                    + "'Bitcoin raising explained', "
+                    + "'2023-11-20 14:13:06.767', "
+                    + "'Bitcoin inflation sparks market growth', "
                     + "'Bitcoin Rise', "
-                    + "0)",
-                "INSERT INTO " + schema + ".ARTICLES VALUES ("
-                    + "NEXT VALUE FOR ARTICLE_GEN, "
-                    + "1, "
-                    + "'A blockchain is a distributed ledger with growing lists of records (blocks) that are securely linked together via cryptographic hashes.', "
-                    + "'https://picsum.photos/200/300', "
-                    + "0, "
-                    + "CURRENT_TIMESTAMP, "
-                    + "'What is a blockchain?', "
-                    + "'Blockchaing Tech', "
-                    + "50220)",
+                    + "10247)",
                 "INSERT INTO " + schema + ".ARTICLES VALUES ("
                     + "NEXT VALUE FOR ARTICLE_GEN, "
                     + "2, "
-                    + "'JavaScript (JS) is a lightweight interpreted (or just-in-time compiled) programming language with first-class functions.', "
-                    + "'https://picsum.photos/200', "
-                    + "1, "
-                    + "CURRENT_TIMESTAMP, "
-                    + "'What exactly is JS?', "
-                    + "'JavaScript Programming Language', "
-                    + "3300)",
-                 "INSERT INTO " + schema + ".ARTICLES VALUES ("
-                    + "NEXT VALUE FOR ARTICLE_GEN, "
-                    + "3, "
-                    + "'Exploring the future of WebAssembly in modern browsers.', "
-                    + "'https://picsum.photos/seed/wa/200/300', "
+                    + "'Blockchain technology is changing the way data is stored and shared. Its decentralized structure ensures transparency and security, making it a vital tool in industries like finance and healthcare.', "
+                    + "'https://picsum.photos/id/238/300/200', "
                     + "0, "
-                    + "CURRENT_TIMESTAMP, "
-                    + "'The potential of WebAssembly', "
-                    + "'WebAssembly Insights', "
-                    + "12000)",
+                    + "'2023-10-15 09:32:12.123', "
+                    + "'Blockchain reshapes industries globally', "
+                    + "'Blockchain Tech', "
+                    + "34487)",
                 "INSERT INTO " + schema + ".ARTICLES VALUES ("
                     + "NEXT VALUE FOR ARTICLE_GEN, "
-                    + "4, "
-                    + "'How blockchain technology is revolutionizing industries.', "
-                    + "'https://picsum.photos/seed/block/200/300', "
+                    + "8, "
+                    + "'JavaScript is a powerful programming language that powers most interactive web pages today. From simple validations to full-fledged applications, its versatility makes it indispensable.', "
+                    + "'https://picsum.photos/id/239/200/300', "
                     + "1, "
-                    + "CURRENT_TIMESTAMP, "
-                    + "'Blockchain in practice', "
-                    + "'Blockchain Revolution', "
-                    + "15000)",
+                    + "'2023-09-10 19:05:44.987', "
+                    + "'JavaScript drives modern web development', "
+                    + "'JavaScript Guide', "
+                    + "8563)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "8, "
+                    + "'WebAssembly has emerged as a groundbreaking technology, offering near-native performance for web apps. Developers can now create advanced tools and games directly in the browser.', "
+                    + "'https://picsum.photos/id/240/300/200', "
+                    + "0, "
+                    + "'2023-08-05 11:23:45.654', "
+                    + "'WebAssembly transforms app development', "
+                    + "'WebAssembly Tech', "
+                    + "11984)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "15, "
+                    + "'The transparency and security of blockchain technology are unmatched. From healthcare to supply chains, its applications are reshaping traditional systems across the globe.', "
+                    + "'https://picsum.photos/id/241/200/300', "
+                    + "1, "
+                    + "'2023-07-25 08:12:56.341', "
+                    + "'Blockchain drives a new era in tech', "
+                    + "'Blockchain Evolution', "
+                    + "5021)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "14, "
+                    + "'Bitcoin, the pioneer of cryptocurrencies, continues to defy expectations. As adoption rates climb, experts predict its role in reshaping the global financial system.', "
+                    + "'https://picsum.photos/id/242/300/200', "
+                    + "0, "
+                    + "'2023-06-30 16:47:23.912', "
+                    + "'Bitcoin adoption reaches new heights', "
+                    + "'Bitcoin Finance', "
+                    + "15893)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "12, "
+                    + "'WebAssembly is bridging the gap between web and native applications. Its ability to run high-performance code in browsers is changing the way developers approach software design.', "
+                    + "'https://picsum.photos/id/243/200/300', "
+                    + "0, "
+                    + "'2023-05-20 10:18:39.487', "
+                    + "'WebAssembly bridges performance gaps', "
+                    + "'WebAssembly Uses', "
+                    + "13267)",
                 "INSERT INTO " + schema + ".ARTICLES VALUES ("
                     + "NEXT VALUE FOR ARTICLE_GEN, "
                     + "5, "
-                    + "'The rise of Bitcoin as a decentralized currency.', "
-                    + "'https://picsum.photos/seed/btc/200/300', "
+                    + "'As the value of Bitcoin fluctuates, its role as digital gold is solidified. It offers a hedge against traditional financial markets and a decentralized store of value.', "
+                    + "'https://picsum.photos/id/244/300/200', "
                     + "0, "
-                    + "CURRENT_TIMESTAMP, "
-                    + "'Bitcoin adoption globally', "
-                    + "'Bitcoin Trends', "
-                    + "8700)",
+                    + "'2023-04-15 14:53:02.231', "
+                    + "'Bitcoin becomes modern digital gold', "
+                    + "'Bitcoin Surge', "
+                    + "10645)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "19, "
+                    + "'JavaScript libraries like React and Angular have made frontend development more efficient. Their modular approach enables developers to build scalable web applications.', "
+                    + "'https://picsum.photos/id/245/200/300', "
+                    + "1, "
+                    + "'2023-03-10 18:26:14.893', "
+                    + "'JavaScript libraries simplify frontend', "
+                    + "'JavaScript Libraries', "
+                    + "22431)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "4, "
+                    + "'Blockchain and WebAssembly together offer a new paradigm for decentralized applications. This combination enhances scalability and security in dApps.', "
+                    + "'https://picsum.photos/id/246/300/200', "
+                    + "1, "
+                    + "'2023-02-01 07:32:09.234', "
+                    + "'Blockchain integrates with WebAssembly', "
+                    + "'Blockchain & WebAssembly', "
+                    + "34587)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "15, "
+                    + "'Bitcoin mining has faced criticism for its environmental impact. However, renewable energy sources are now being explored to make mining more sustainable and eco-friendly.', "
+                    + "'https://picsum.photos/id/247/200/300', "
+                    + "0, "
+                    + "'2023-01-12 11:15:22.456', "
+                    + "'Bitcoin mining goes green', "
+                    + "'Bitcoin Mining', "
+                    + "27836)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "7, "
+                    + "'Smart contracts are a revolutionary feature of blockchain technology. They automate transactions and agreements, removing the need for intermediaries and increasing efficiency.', "
+                    + "'https://picsum.photos/id/248/300/200', "
+                    + "0, "
+                    + "'2023-02-25 13:45:34.789', "
+                    + "'Smart contracts: a blockchain feature', "
+                    + "'Blockchain Basics', "
+                    + "19345)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "6, "
+                    + "'WebAssembly is redefining the gaming industry by enabling developers to create browser-based games with near-native performance. This technology brings powerful gaming experiences to the web.', "
+                    + "'https://picsum.photos/id/249/200/300', "
+                    + "0, "
+                    + "'2023-03-08 09:10:45.321', "
+                    + "'WebAssembly revolutionizes gaming', "
+                    + "'WebAssembly Gaming', "
+                    + "25289)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "13, "
+                    + "'Blockchain technology is now being implemented in voting systems to ensure transparency and prevent tampering. This approach could redefine electoral processes.', "
+                    + "'https://picsum.photos/id/250/300/200', "
+                    + "1, "
+                    + "'2023-04-14 15:25:18.654', "
+                    + "'Blockchain in voting systems', "
+                    + "'Blockchain Revolution', "
+                    + "14578)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "6, "
+                    + "'Bitcoin wallets are becoming increasingly user-friendly. As adoption grows, so do tools to make cryptocurrency management accessible to everyday users.', "
+                    + "'https://picsum.photos/id/251/200/300', "
+                    + "0, "
+                    + "'2023-05-30 14:36:19.732', "
+                    + "'User-friendly Bitcoin wallets', "
+                    + "'Bitcoin Tools', "
+                    + "10953)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "14, "
+                    + "'WebAssembly could be the future of cloud computing. Its ability to execute high-performance code in distributed environments is attracting attention from major tech players.', "
+                    + "'https://picsum.photos/id/252/300/200', "
+                    + "0, "
+                    + "'2023-06-20 10:56:47.293', "
+                    + "'WebAssembly in cloud computing', "
+                    + "'WebAssembly Potential', "
+                    + "13567)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "18, "
+                    + "'JavaScript frameworks like Vue.js and Svelte are simplifying web development for beginners and experts alike. Their focus on simplicity and performance is reshaping the landscape.', "
+                    + "'https://picsum.photos/id/253/200/300', "
+                    + "1, "
+                    + "'2023-07-18 17:20:11.812', "
+                    + "'Emerging JavaScript frameworks', "
+                    + "'JavaScript Frameworks', "
+                    + "15623)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "17, "
+                    + "'Bitcoin price volatility remains a challenge for mainstream adoption. However, innovations like stablecoins and hedging tools are helping address these issues.', "
+                    + "'https://picsum.photos/id/254/300/200', "
+                    + "0, "
+                    + "'2023-08-10 08:45:39.509', "
+                    + "'Tackling Bitcoin volatility', "
+                    + "'Bitcoin Challenges', "
+                    + "8702)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "1, "
+                    + "'Blockchain adoption is surging in supply chain management. The technology is being used to track goods and ensure transparency in global logistics.', "
+                    + "'https://picsum.photos/id/256/300/200', "
+                    + "1, "
+                    + "'2023-10-10 12:50:22.673', "
+                    + "'Blockchain in global supply chains', "
+                    + "'Blockchain Logistics', "
+                    + "18872)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "15, "
+                    + "'WebAssembly is enabling complex applications like video editors and CAD tools to run seamlessly in browsers. This technology is bringing professional-grade tools to the web.', "
+                    + "'https://picsum.photos/id/258/300/200', "
+                    + "1, "
+                    + "'2023-12-05 09:15:45.903', "
+                    + "'WebAssembly for professional apps', "
+                    + "'WebAssembly Tools', "
+                    + "19845)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "7, "
+                    + "'Bitcoin ATMs are now available in over 50 countries, making it easier for users to access and trade cryptocurrency. This infrastructure marks a key milestone in adoption.', "
+                    + "'https://picsum.photos/id/257/300/200', "
+                    + "0, "
+                    + "'2023-11-15 13:30:22.812', "
+                    + "'Bitcoin ATMs: A global reach', "
+                    + "'Bitcoin Infrastructure', "
+                    + "17435)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "16, "
+                    + "'WebAssembly powers AI on the web', "
+                    + "'https://picsum.photos/id/263/200/300', "
+                    + "1, "
+                    + "'2024-03-05 15:10:29.789', "
+                    + "'WebAssembly powers AI on the web', "
+                    + "'WebAssembly AI', "
+                    + "25432)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "19, "
+                    + "'JavaScript remains a staple in modern web development. Its ecosystem, including npm and other libraries, ensures its dominance for years to come.', "
+                    + "'https://picsum.photos/id/264/300/200', "
+                    + "1, "
+                    + "'2024-03-15 10:25:44.546', "
+                    + "'JavaScript: A language for all', "
+                    + "'JavaScript Ecosystem', "
+                    + "14230)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "10, "
+                    + "'Blockchain in gaming is allowing players to own in-game assets. These assets can be traded securely using blockchain technology, creating new revenue streams.', "
+                    + "'https://picsum.photos/id/265/300/200', "
+                    + "1, "
+                    + "'2024-04-01 09:40:12.134', "
+                    + "'Blockchain in gaming', "
+                    + "'Blockchain Gaming', "
+                    + "16754)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "9, "
+                    + "'WebAssembly is set to redefine augmented reality applications. By running AR software in the browser, it brings immersive experiences to a broader audience.', "
+                    + "'https://picsum.photos/id/266/300/200', "
+                    + "0, "
+                    + "'2024-04-20 11:55:22.783', "
+                    + "'WebAssembly in augmented reality', "
+                    + "'WebAssembly AR', "
+                    + "18945)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "12, "
+                    + "'Blockchain is becoming an essential tool in real estate transactions. It enables secure and transparent property ownership transfers, reducing fraud and increasing efficiency.', "
+                    + "'https://picsum.photos/id/267/300/200', "
+                    + "1, "
+                    + "'2024-05-05 10:30:15.764', "
+                    + "'Blockchain in real estate', "
+                    + "'Blockchain Real Estate', "
+                    + "24321)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "6, "
+                    + "'WebAssembly is being used in scientific computing to enable complex calculations in the browser. Researchers are now able to run simulations without the need for specialized hardware.', "
+                    + "'https://picsum.photos/id/268/300/200', "
+                    + "1, "
+                    + "'2024-05-20 15:45:09.214', "
+                    + "'WebAssembly in scientific computing', "
+                    + "'WebAssembly Science', "
+                    + "19203)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "3, "
+                    + "'JavaScript tooling has seen exponential growth, providing developers with powerful new libraries and frameworks that make building web applications faster and easier.', "
+                    + "'https://picsum.photos/id/269/300/200', "
+                    + "1, "
+                    + "'2024-06-10 14:12:45.678', "
+                    + "'JavaScript tooling evolution', "
+                    + "'JavaScript Tools', "
+                    + "21034)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "17, "
+                    + "'Bitcoin ETFs are gaining traction in financial markets. These funds allow investors to gain exposure to cryptocurrency without directly owning Bitcoin, reducing risk.', "
+                    + "'https://picsum.photos/id/270/300/200', "
+                    + "0, "
+                    + "'2024-07-01 09:22:33.981', "
+                    + "'Bitcoin ETFs and market adoption', "
+                    + "'Bitcoin ETFs', "
+                    + "18453)",
+                "INSERT INTO " + schema + ".ARTICLES VALUES ("
+                    + "NEXT VALUE FOR ARTICLE_GEN, "
+                    + "20, "
+                    + "'WebAssembly is enhancing mobile web applications by improving performance and enabling developers to deliver app-like experiences directly through browsers.', "
+                    + "'https://picsum.photos/id/271/300/200', "
+                    + "0, "
+                    + "'2024-07-15 16:50:22.456', "
+                    + "'WebAssembly in mobile web', "
+                    + "'WebAssembly Mobile', "
+                    + "16542)",
+
                 
                 // Relacions article-tòpic (ARTICLE_TOPICS)
                 "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (1, 1)",
@@ -126,7 +375,46 @@
                 "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (3, 4)",
                 "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (4, 4)",
                 "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (5, 2)",
-                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (6, 1)"
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (5, 1)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (6, 1)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (7, 4)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (7, 2)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (8, 1)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (9, 3)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (9, 4)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (10, 2)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (10, 4)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (11, 1)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (12, 2)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (13, 4)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (14, 2)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (14, 4)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (15, 1)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (15, 2)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (16, 4)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (16, 3)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (17, 3)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (18, 1)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (18, 2)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (19, 4)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (20, 2)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (20, 3)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (21, 1)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (22, 4)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (22, 3)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (23, 2)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (23, 1)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (24, 3)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (24, 4)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (25, 2)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (26, 1)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (26, 2)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (27, 4)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (28, 3)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (28, 2)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (29, 2)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (29, 4)",
+                "INSERT INTO " + schema + ".ARTICLE_TOPIC VALUES (30, 4)"
             };
             for (String datum : data) {
                 if (stmt.executeUpdate(datum)<=0) {

@@ -32,6 +32,8 @@ public class ArticleDTO {
     
     private String authorUsername;
     
+    private String authorProfileURL;
+    
     private Integer views;
     
     private boolean isPrivate;
@@ -41,7 +43,7 @@ public class ArticleDTO {
     public ArticleDTO() {
     }
     
-    public ArticleDTO(Long id, String title, List<String> topics, String summary, String body, Date publishedAt, String authorUsername, Integer views, boolean isPrivate, String imageURL) {
+    public ArticleDTO(Long id, String title, List<String> topics, String summary, String body, Date publishedAt, String authorUsername, String authorProfileURL, Integer views, boolean isPrivate, String imageURL) {
         this.id = id;
         this.title = title;
         this.topics = topics;
@@ -49,9 +51,18 @@ public class ArticleDTO {
         this.body = body;
         this.publishedAt = publishedAt;
         this.authorUsername = authorUsername;
+        this.authorProfileURL = authorProfileURL;
         this.views = views;
         this.isPrivate = isPrivate;
         this.imageURL = imageURL;
+    }
+
+    public String getAuthorProfileURL() {
+        return authorProfileURL;
+    }
+
+    public void setAuthorProfileURL(String authorProfileURL) {
+        this.authorProfileURL = authorProfileURL;
     }
 
     public Long getId() {
@@ -144,6 +155,7 @@ public class ArticleDTO {
                 ", body='" + body + '\'' +
                 ", publishedAt=" + publishedAt +
                 ", authorUsername='" + authorUsername + '\'' +
+                ", authorProfileURL='" + authorProfileURL + '\'' +
                 ", views=" + views +
                 ", isPrivate=" + isPrivate +
                 ", imageURL='" + imageURL + '\'' +

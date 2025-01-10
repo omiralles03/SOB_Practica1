@@ -42,6 +42,9 @@ public class User implements Serializable{
     @Transient
     private Link links;
     
+    @Column(nullable = true, length = 255)
+    private String imageURL;
+    
     public Long getLastArticleId(EntityManager em) {
         try {
             return em.createNamedQuery("User.getLastArticleId", Long.class)
@@ -83,6 +86,14 @@ public class User implements Serializable{
 
     public void setLinks(Link links) {
         this.links = links;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     @Override

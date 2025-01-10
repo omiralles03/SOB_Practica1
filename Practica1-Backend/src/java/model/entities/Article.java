@@ -159,15 +159,25 @@ public class Article implements Serializable{
     public int hashCode() {
         return Objects.hash(id);
     }
-
+    
     @Override
     public String toString() {
         return "Article{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
-                ", summary='" + summary + '\'' +
-                ", views=" + views +
-                ", imageURL='" + imageURL + '\'' +
+                ", authorId='" + authorId + '\'' +
                 '}';
+                
     }
+//    @Override
+//    public String toString() {
+//        return "Article{" +
+//                "id=" + id +
+//                ", title='" + title + '\'' +
+//                ", summary='" + summary + '\'' +
+//                ", authorId=" + authorId +
+//                ", views=" + views +
+//                ", publishedAt=" + publishedAt +
+//                ", isPrivate=" + isPrivate +
+//                '}';
+//    }
 }

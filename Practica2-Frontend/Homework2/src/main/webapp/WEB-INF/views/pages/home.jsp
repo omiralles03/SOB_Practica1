@@ -16,6 +16,7 @@
             
             <!-- Main Section -->
             <main class="flex-1">
+
                 <!-- Filter Section -->
                 <div class="flex flex-col items-center">
                     <div class="flex justify-between items-center w-[700px] mx-auto my-4">

@@ -12,5 +12,6 @@ import java.util.List;
  */
 public interface ArticleService {
     List<Article> getAllArticles();
-    Article getArticleById(int id);
+    Article getArticleById(Long id);
+    Long getLastArticleById(Long userId);
 }

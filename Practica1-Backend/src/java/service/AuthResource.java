@@ -42,9 +42,8 @@ public class AuthResource {
                 String token = JwtUtil.generateToken(user.getUsername());
                 JsonObject jsonResponse = Json.createObjectBuilder()
                     .add("token", token)
-                    .add("username", user.getUsername())
-                    .add("userId", foundUser.getId())
-                    .add("expiration", JwtUtil.getExpirationDate(token).toString())
+                    .add("id", foundUser.getId())
+                    .add("userProfileURL", foundUser.getImageURL())
                     .build();
 
                 return Response.ok(jsonResponse).build();

@@ -29,7 +29,6 @@ public class HomeController {
 
     @GET
     public String showHomePage() {
-        log.log(Level.INFO, "FOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         List<Article> articles = articleService.getAllArticles();
         models.put("articles", articles);
         return "pages/home.jsp";

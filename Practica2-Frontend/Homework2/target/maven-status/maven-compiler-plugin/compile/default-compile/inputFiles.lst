@@ -1,6 +1,7 @@
 C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\service\ArticleServiceImpl.java
 C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\controller\ArticleController.java
 C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\controller\LogoutController.java
+C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\controller\AuthController.java
 C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\MvcEventListener.java
 C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\controller\UserForm.java
 C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\resources\JakartaEE9Resource.java
@@ -8,10 +9,11 @@ C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-F
 C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\model\User.java
 C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\PropertyProducer.java
 C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\controller\HomeController.java
-C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\controller\SignUpFormController.java
+C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\service\AuthService.java
 C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\model\SignUpAttempts.java
 C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\exception\PropertyException.java
 C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\JakartaRestConfiguration.java
+C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\controller\ProfileController.java
 C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\service\ArticleService.java
 C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\Config.java
 C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\model\AlertMessage.java
@@ -19,4 +21,3 @@ C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-F
 C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\model\Article.java
 C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\Property.java
 C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\Resources.java
-C:\Users\oupma\REPOSITORIES\SOB_P1_GerardRos_OupmanMiralles\projecte\Practica2-Frontend\Homework2\src\main\java\deim\urv\cat\homework2\service\UserServiceImpl.java

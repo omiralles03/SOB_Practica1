@@ -16,8 +16,13 @@
             
             <!-- Main Section -->
             <main class="flex-1">
-                
+                <div class="flex flex-col items-center">
+                    <div class="flex justify-between items-center w-[700px] mx-auto my-4">                        
+                        <%@ include file="../layout/articleFig2.jsp" %>
+                    </div>
+                </div>
             </main>
+
 
             <!-- Right Sidebar -->
             <aside class="hidden lg:block w-80">

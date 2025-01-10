@@ -1,11 +1,15 @@
 <div class="text-white overflow-hidden relative w-[700px] mx-auto bg-transparent hover:bg-[#181c1f] transition duration-300">
-    <a href="<c:url value="/Web/Article" />"
+    <a href="<c:url value='/Web/Article/${article.id}' />">
         <!-- Separation Line -->
         <div class="h-[3px] bg-neutral-700 w-full mb-4"></div>
 
         <!-- Row 1: Author and Date -->
         <div class="flex justify-between items-center px-6 py-2">
             <div class="flex items-center gap-2 text-gray-400 text-lg">
+                <img 
+                    src="${article.authorProfileURL}"
+                    alt="${article.authorUsername}"
+                    class="w-8 h-8 rounded-full">
                 <p class="font-bold text-gray-200">${article.authorUsername}</p>
                 <span class="text-xl">·</span>
                 <p class="text-sm">${article.publishedAt}</p>
@@ -17,12 +21,14 @@
             <h2 class="text-2xl font-bold">${article.title}</h2>
         </div>
 
-        <!-- Row 3: Summary -->
-        <div class="px-6 py-2">
-            <p class="text-lg text-gray-300">${article.summary}</p>
-        </div>
+        <!-- Row 3: Summary (only if it exists) -->
+        <c:if test="${not empty article.summary}">
+            <div class="px-6 py-2">
+                <p class="text-lg text-gray-300">${article.summary}</p>
+            </div>
+        </c:if>
 
-        <!-- Row 4: Image -->
+        <!-- Row 4: Image (only if it exists) -->
         <c:if test="${not empty article.imageURL}">
             <div class="relative h-96 w-full px-4 overflow-hidden rounded-3xl bg-neutral-900/30">
                 <!-- Blurred Background -->
@@ -56,8 +62,8 @@
                 </c:if>
             </div>
         </div>
-                    
     </a>
+
     <!-- Row 6: Actions -->
     <div class="flex justify-start items-center gap-4 px-6 py-2">
         <button class="flex items-center justify-center px-6 py-2 bg-[#333d42] text-white rounded-full hover:bg-[#3d464c] focus:outline-none focus:ring-2 focus:ring-[#3d464c]">
