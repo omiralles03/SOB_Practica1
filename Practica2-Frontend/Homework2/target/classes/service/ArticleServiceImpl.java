@@ -64,7 +64,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
     
     @Override
-    public Long getLastArticleById(Long userId) {
+    public Long getLastArticleId(Long userId) {
         String reqURI = "http://localhost:12521/Practica1-Backend/rest/api/v1/customer";
         String token = (String) request.getSession().getAttribute("authToken");
         Response response = client.target(reqURI)
@@ -81,9 +81,50 @@ public class ArticleServiceImpl implements ArticleService {
                 jsonObject = jsonReader.readObject();
             }
             
-            String articleLink = jsonObject.getJsonObject("links").getString("article");
-            return Long.valueOf(articleLink.split("/")[2]);
+        // Comprova si el camp "links" i "article" existeixen
+        if (jsonObject.containsKey("links")) {
+            JsonObject links = jsonObject.getJsonObject("links");
+            if (links.containsKey("article")) {
+                String articleLink = links.getString("article");
+                return Long.valueOf(articleLink.split("/")[2]);
+            }
+        }
+
+        // Si no hi ha cap article retorna null
+        return null;
+            
         }
         return null;
+    }
+    
+    @Override
+    public List<Article> searchArticles(String query, List<String> topics, String author) {
+        Response response;
+        WebTarget target = webTarget.path("search");
+    
+        if (query != null && !query.trim().isEmpty()) {
+            target = target.queryParam("query", query.trim());
+        }
+        
+        if (topics != null && !topics.isEmpty()) {
+            for (String topic : topics) {
+                if (topic != null && !topic.trim().isEmpty()) {
+                    target = target.queryParam("topic", topic.trim());
+                }
+            }
+        }
+        
+        if (author != null && !author.trim().isEmpty()) {
+            target = target.queryParam("author", author.trim());
+        }
+        
+        response = target.request(MediaType.APPLICATION_JSON).get();
+
+        if (response.getStatus() == 200) {
+            return response.readEntity(new GenericType<List<Article>>() {});
+        } else {
+            System.out.println("Error en buscar articles. Status: " + response.getStatus());
+            return Collections.emptyList();
+        }
     }
 }

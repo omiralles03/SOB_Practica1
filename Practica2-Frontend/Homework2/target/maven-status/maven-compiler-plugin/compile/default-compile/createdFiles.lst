@@ -1,4 +1,5 @@
 deim\urv\cat\homework2\model\AlertMessage.class
+deim\urv\cat\homework2\controller\RegisterController.class
 deim\urv\cat\homework2\resources\JakartaEE9Resource.class
 deim\urv\cat\homework2\model\AlertMessage$Error.class
 deim\urv\cat\homework2\model\AlertMessage$1.class
@@ -15,14 +16,19 @@ deim\urv\cat\homework2\controller\LogoutController.class
 deim\urv\cat\homework2\service\AuthService$LoginRequest.class
 deim\urv\cat\homework2\controller\AuthController.class
 deim\urv\cat\homework2\controller\UserForm.class
+deim\urv\cat\homework2\service\UserService$RegisterRequest.class
 deim\urv\cat\homework2\exception\PropertyException.class
 Main.class
+deim\urv\cat\homework2\service\ArticleServiceImpl$2.class
 deim\urv\cat\homework2\model\AlertMessage$Type.class
+deim\urv\cat\homework2\controller\UsersController.class
 deim\urv\cat\homework2\model\SignUpAttempts.class
 deim\urv\cat\homework2\controller\HomeController.class
 deim\urv\cat\homework2\service\UserService.class
+deim\urv\cat\homework2\model\UserDTO.class
 deim\urv\cat\homework2\JakartaRestConfiguration.class
 deim\urv\cat\homework2\Resources.class
 deim\urv\cat\homework2\controller\ProfileController.class
+deim\urv\cat\homework2\service\UserService$1.class
 deim\urv\cat\homework2\model\Article.class
 deim\urv\cat\homework2\service\ArticleService.class

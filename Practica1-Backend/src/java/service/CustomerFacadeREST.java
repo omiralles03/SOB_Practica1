@@ -103,4 +103,46 @@ public class CustomerFacadeREST {
 
         return Response.ok("User updated successfully").build();
     }
+    
+    @POST
+    @Path("register")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response registerUser(User newUser) {
+        // Comprova si ja existeix un usuari amb aquest username
+        Long existingUserCount = em.createQuery(
+                "SELECT COUNT(u) FROM User u WHERE u.username = :username", Long.class)
+                .setParameter("username", newUser.getUsername())
+                .getSingleResult();
+
+        if (existingUserCount > 0) {
+            return Response.status(Response.Status.CONFLICT)
+                    .entity("Username already exists.")
+                    .build();
+        }
+
+        // Comprova si la contrasenya i el username són vàlids
+        if (newUser.getUsername() == null || newUser.getUsername().isEmpty()) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Username cannot be empty.")
+                    .build();
+        }
+
+        if (newUser.getPassword() == null || newUser.getPassword().isEmpty()) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity("Password cannot be empty.")
+                    .build();
+        }
+        
+        // Imatge per defecte
+        newUser.setImageURL("https://randomuser.me/api/portraits/lego/1.jpg");
+        System.out.println("THE BACKEND IN FOKIN USER CREATED LMFAO");
+ 
+        // Guarda el nou usuari
+        em.persist(newUser);
+
+        return Response.status(Response.Status.CREATED)
+                .entity("User registered successfully.")
+                .build();
+    }
 }

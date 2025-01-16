@@ -34,8 +34,11 @@ public class ProfileController {
     @GET
     public String showProfilePage(@Context HttpServletRequest request) {
         Long userId = (Long) request.getSession().getAttribute("userId");
-        Article article = articleService.getArticleById(articleService.getLastArticleById(userId));
-        models.put("article", article);
+        Long articleId = articleService.getLastArticleId(userId);
+        if(articleId != null) {
+            Article article = articleService.getArticleById(articleId);
+            models.put("article", article);
+        }
         return "pages/profile.jsp";
     }
 }

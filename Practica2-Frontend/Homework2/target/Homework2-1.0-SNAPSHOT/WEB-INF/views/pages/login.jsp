@@ -15,14 +15,14 @@
     <body class="flex items-center justify-center min-h-screen bg-neutral-900 text-white">
         <div class="bg-neutral-800 p-8 rounded-lg w-[400px]">
             <h1 class="text-2xl font-bold mb-4 text-center">Login</h1>
-            
+
             <!--Error login-->
             <c:if test="${not empty error}">
                 <div class="bg-red-600 text-white text-center py-2 rounded mb-4 font-bold">
                     <p style="color: rgb(125, 47, 47)">${error}</p>
                 </div>
             </c:if>
-            
+
             <form action="${mvc.uri('login')}" class="form-horizontal" method="POST">
                 <input type="hidden" name="${mvc.csrf.name}" value="${mvc.csrf.token}"/>
                 <div class="flex flex-col gap-4">
@@ -49,6 +49,12 @@
                     </button>
                 </div>
             </form>
+            <div class="text-center mt-4">
+                <p class="text-gray-400">Don't have an account? 
+                    <a href="<c:url value='/Web/Register' />" class="text-primary text-white hover:underline">Register</a>
+                </p>
+            </div>
+
         </div>
     </body>
 </html>

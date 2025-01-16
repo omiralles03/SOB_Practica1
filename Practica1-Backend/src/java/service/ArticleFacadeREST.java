@@ -320,4 +320,93 @@ public class ArticleFacadeREST extends AbstractFacade<Article> {
                 .entity("Article created with ID: " + article.getId())
                 .build();
     }
+    
+    @GET
+    @Path("search")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response searchArticles(@QueryParam("query") String query, @QueryParam("topic") List<String> topics, @QueryParam("author") String author) {
+        
+        // Query builder
+        StringBuilder queryString = new StringBuilder("SELECT a FROM Article a WHERE 1=1");
+
+        // Topics filter
+        List<Long> topicIds = null;
+        if (topics != null && !topics.isEmpty() && topics.stream().anyMatch(topic -> topic != null && !topic.isEmpty())) {
+            topicIds = em.createQuery("SELECT t.id FROM Topic t WHERE t.name IN :topicNames", Long.class)
+                    .setParameter("topicNames", topics)
+                    .getResultList();
+            if (topicIds.isEmpty()) {
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity("No articles found with those topics.")
+                        .build();
+            }
+            queryString.append(" AND EXISTS (SELECT t FROM a.topicIds t WHERE t IN :topicIds)");
+        }
+
+        // Author filter
+        Long authorId = null;
+        if (author != null && !author.isEmpty()) {
+            try {
+                authorId = em.createQuery("SELECT u.id FROM User u WHERE u.username = :authorName", Long.class)
+                        .setParameter("authorName", author)
+                        .getSingleResult();
+            } catch (NoResultException e) {
+                return Response.status(Response.Status.NOT_FOUND)
+                        .entity("No articles found with this author, or the author does not exist.")
+                        .build();
+            }
+            queryString.append(" AND a.authorId = :authorId");
+        }
+        
+        // Text filter
+        if (query != null && !query.trim().isEmpty()) {
+            queryString.append(" AND (LOWER(a.title) LIKE :query OR LOWER(a.body) LIKE :query)");
+        }
+
+        // Sort by views DESC
+        queryString.append(" ORDER BY a.views DESC");
+
+        // Create the query with the parameters
+        TypedQuery<Article> typedQuery = em.createQuery(queryString.toString(), Article.class);
+
+        if (topics != null && !topics.isEmpty() && topicIds != null) {
+            typedQuery.setParameter("topicIds", topicIds);
+        }
+        if (authorId != null) {
+            typedQuery.setParameter("authorId", authorId);
+        }
+        if (query != null && !query.trim().isEmpty()) {
+            typedQuery.setParameter("query", "%" + query.toLowerCase() + "%");
+        }
+
+        // Execute query and get the articles as result
+        List<Article> articles = typedQuery.getResultList();
+        if (articles.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("No articles found with the specified filters.")
+                    .build();
+        }
+
+        // Format articles as DTOs
+        List<ArticleDTO> articleDTOs = articles.stream()
+                .map(article -> {
+                    User authorEntity = em.find(User.class, article.getAuthorId());
+                    return new ArticleDTO(
+                            article.getId(),
+                            article.getTitle(),
+                            null, // Afegeix temes si cal
+                            article.getSummary(),
+                            null, // Afegeix el cos complet si cal
+                            article.getPublishedAt(),
+                            authorEntity.getUsername(),
+                            authorEntity.getImageURL(),
+                            article.getViews(),
+                            article.getIsPrivate(),
+                            article.getImageURL()
+                    );
+                })
+                .toList();
+
+        return Response.ok(articleDTOs).build();
+    }
 }

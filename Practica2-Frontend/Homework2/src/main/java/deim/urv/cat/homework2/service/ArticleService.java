@@ -13,5 +13,6 @@ import java.util.List;
 public interface ArticleService {
     List<Article> getAllArticles();
     Article getArticleById(Long id);
-    Long getLastArticleById(Long userId);
+    Long getLastArticleId(Long userId);
+    List<Article> searchArticles(String query, List<String> topics, String author);
 }

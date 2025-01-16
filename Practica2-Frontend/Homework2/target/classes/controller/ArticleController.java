@@ -9,9 +9,11 @@ import deim.urv.cat.homework2.service.ArticleService;
 import jakarta.inject.Inject;
 import jakarta.mvc.Controller;
 import jakarta.mvc.Models;
+import jakarta.mvc.UriRef;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.QueryParam;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,5 +40,13 @@ public class ArticleController {
         }
         models.put("article", article);
         return "pages/article.jsp";
+    }
+    
+    @GET
+    @UriRef("search")
+    public String searchArticles(@QueryParam("query") String query, @QueryParam("topic") List<String> topics, @QueryParam("author") String author) {
+        List<Article> articles = articleService.searchArticles(query, topics, author);
+        models.put("articles", articles);
+        return "pages/home.jsp";
     }
 }

@@ -9,10 +9,11 @@ import deim.urv.cat.homework2.service.ArticleService;
 import jakarta.inject.Inject;
 import jakarta.mvc.Controller;
 import jakarta.mvc.Models;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.Context;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -26,10 +27,11 @@ public class HomeController {
     @Inject Logger log; // Logger per depurar    
     @Inject ArticleService articleService;
     @Inject Models models; // Per injectar dades al JSP
-
+    
     @GET
-    public String showHomePage() {
+    public String showHomePage(@Context HttpServletRequest request) {
         List<Article> articles = articleService.getAllArticles();
+        request.getSession().setAttribute("totalArticles", articles.size());
         models.put("articles", articles);
         return "pages/home.jsp";
     }
