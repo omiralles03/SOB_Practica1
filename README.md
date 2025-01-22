@@ -7,3 +7,9 @@ Key Features:
 - **Article Management:** Create, view, delete, and filter articles based on authors and topics.
 - **RESTful API:** A backend API built using Jakarta EE to manage all interactions between the client and server.
 - **Dynamic Frontend:** Built using JSP and TailwindCSS for responsive design and seamless user experience.
+
+# 🗂️ Project Structure
+**1. Backend**
+
+**2. Frontend**
+The frontend is built using JSP pages and TailwindCSS.
