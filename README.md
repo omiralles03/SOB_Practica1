@@ -10,7 +10,7 @@ This repository contains the implementation of a web application for managing an
 - **RESTful API:** A backend API built using Jakarta EE to manage all interactions between the client and server.
 - **Dynamic Frontend:** Built using JSP and TailwindCSS for responsive design and seamless user experience.
 
----
+
 
 ## 🗂️ Project Structure
 ### **1. Backend**
@@ -34,11 +34,11 @@ The frontend is built using JSP pages and TailwindCSS. It handles:
 - **Service:** Makes API calls to the backend using RESTful endpoints, retrieves data, and sends it to the controllers for further processing.
 - **WEB-INF:** Houses JSP files that dynamically render content for users.
 
-- #### Key Folders
-- **`layout`**: Contains reusable JSP components like navbars, footers, and sidebars.
-- **`pages`**: Full-page templates for user interactions (e.g., home, profile, users).
+#### Key Folders
+- **layout**: Contains reusable JSP components like navbars, footers, and sidebars.
+- **pages**: Full-page templates for user interactions (e.g., home, profile, users).
 
----
+
 
 ## 🛠️ **How It Works: Communication Between Layers**
 
@@ -61,7 +61,7 @@ calls the `UserService`, which queries the database to fetch user data.
 1. **Persistence**: The service communicates with the database using the EntityManager and queries.
 2. **DTOs**: Data is transformed into DTOs before being sent to the view, ensuring security and flexibility.
 
----
+
 
 ## 📑 **Endpoints**
 
@@ -77,7 +77,7 @@ calls the `UserService`, which queries the database to fetch user data.
 - `GET /article/{id}`: Fetches a single article by ID.
 - `GET /article/search`: Fetches articles filtered by query, topics, or author.
 
----
+
 
 ## 🚀 **How to Run the Project**
 
@@ -89,22 +89,24 @@ calls the `UserService`, which queries the database to fetch user data.
 
 ### Steps
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/omiralles03/SOB_Practica1.git
    ```
-2. Open the project in your IDE and configure the Java DB and GlashFish Server.
-3. Create a new database named homework1 with name and password `root`, `ROOT` or set it up however you like in `persistence.xml`.
-4. Connect to the database and launch GlassFish server.
-5. Make sure to change the frontend PORTS in services to your GlassFish Server (By default `8080`, in this project `12521`).
-6. Clean & Build and Deploy the backend on the GlassFish server.
-7. Insert the data to the database with the jsp.install launched in your browser.
-8. Clean & Build and Deploy the front on the GlassFish server.
-9. Start the application and access it at:
+3. Open the project in your IDE and configure the Java DB and GlashFish Server.
+4. Create a new database named homework1 with name and password `root`, `ROOT` or set it up however you like in `persistence.xml`.
+5. Connect to the database and launch GlassFish server.
+6. Make sure to change the frontend PORTS in services to your GlassFish Server (By default `8080`, in this project `12521`).
+7. Clean & Build and Deploy the backend on the GlassFish server.
+8. Insert the data to the database with the jsp.install launched in your browser.
+9. Clean & Build and Deploy the front on the GlassFish server.
+10. Start the application and access it at:
+
    ```
    http://localhost:<port>/Homework2/Web
    ```
 
----
+
 
 ## 🧪 **Testing**
 The project has been tested with multiple scenarios:
